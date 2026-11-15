@@ -8,20 +8,82 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="/website/css/style.css?v=2026_blue_header_v1" />
+  <link rel="stylesheet" href="/website/css/style.css?v=2026_v4" />
+  <link rel="stylesheet" href="/website/css/page-themes.css?v=2026_v4" />
   <script src="/website/js/assets.js"></script>
   <script src="/website/js/api.js"></script>
+  <script src="/website/js/customization-sync.js"></script>
   <style>
-    /* ─── Programs Header (Warm Luxury Editorial) ─── */
+    /* ─── Programs Navbar Brand & Navigation Text (Radiant High-Contrast White & Gold) ─── */
+    #navbar, nav {
+      backdrop-filter: blur(16px) !important;
+      -webkit-backdrop-filter: blur(16px) !important;
+    }
+    #navbar .lg,
+    nav .lg,
+    #navbar #brand-link,
+    .prog-header ~ #navbar .lg {
+      color: #FFFFFF !important;
+      font-weight: 700 !important;
+      text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5) !important;
+    }
+    #navbar .lg span,
+    nav .lg span {
+      color: #FFFFFF !important;
+      text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5) !important;
+    }
+    #navbar .lg small,
+    #navbar .lg .lg-sub,
+    nav .lg small,
+    nav .lg .lg-sub {
+      color: #FDE68A !important;
+      opacity: 0.95 !important;
+      font-weight: 600 !important;
+      letter-spacing: 0.05em !important;
+      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6) !important;
+    }
+    #navbar #lgi,
+    nav #lgi {
+      border: 2px solid rgba(255, 255, 255, 0.75) !important;
+      box-shadow: 0 0 12px rgba(0, 0, 0, 0.35) !important;
+    }
+    #navbar .lk a,
+    nav .lk a {
+      color: rgba(255, 255, 255, 0.92) !important;
+      font-weight: 500 !important;
+      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4) !important;
+    }
+    #navbar .lk a:hover,
+    nav .lk a:hover {
+      color: #FDE68A !important;
+      background: rgba(255, 255, 255, 0.16) !important;
+    }
+    #navbar .lk a.on,
+    nav .lk a.on {
+      color: #FFFFFF !important;
+      background: rgba(255, 255, 255, 0.22) !important;
+      font-weight: 600 !important;
+      border: 1px solid rgba(255, 255, 255, 0.35) !important;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25) !important;
+    }
+    #navbar .menu-toggle,
+    nav .menu-toggle {
+      color: #FFFFFF !important;
+      border: 1px solid rgba(255, 255, 255, 0.35) !important;
+      background: rgba(255, 255, 255, 0.12) !important;
+    }
+
+    /* ─── Programs Header (Academy-themed with card color theme) ─── */
     .prog-header {
-      background:
-        linear-gradient(90deg, rgba(8, 6, 4, 0.95) 0%, rgba(8, 6, 4, 0.88) 32%, rgba(8, 6, 4, 0.40) 52%, transparent 72%),
-        linear-gradient(180deg, rgba(8, 6, 4, 0.4) 0%, transparent 25%, rgba(8, 6, 4, 0.5) 100%),
-        url("/website/images/Academy%20page%20image.png");
+      background-color: #0F2D55 !important; /* Solid color fallback - never white */
+      background: linear-gradient(135deg, #0A192F 0%, #0F2D55 35%, #1D4ED8 70%, #2563EB 100%) !important;
+      background-image:
+        linear-gradient(135deg, rgba(10, 25, 47, 0.92) 0%, rgba(15, 45, 85, 0.85) 35%, rgba(29, 78, 216, 0.70) 100%),
+        url("/website/images/Academy.png") !important;
       background-size: cover !important;
-      background-position: 72% center !important;
+      background-position: center right !important;
       background-repeat: no-repeat !important;
-      color: #fff;
+      color: #FFFFFF !important;
       height: 100vh;
       height: 100svh;
       min-height: 520px;
@@ -31,7 +93,7 @@
       padding: calc(var(--nav-height, 64px) + clamp(16px, 3vh, 36px)) clamp(24px, 5vw, 64px) 36px;
       box-sizing: border-box;
       position: relative;
-      border-bottom: 1px solid rgba(201, 168, 76, 0.28);
+      border-bottom: 2px solid rgba(255, 255, 255, 0.25);
       overflow: hidden;
       transition: background 0.6s ease;
     }
@@ -154,11 +216,6 @@
         height: auto;
         min-height: 480px;
         padding: 90px 20px 36px;
-        background:
-          linear-gradient(180deg, rgba(8, 6, 4, 0.92) 0%, rgba(8, 6, 4, 0.85) 60%, rgba(8, 6, 4, 0.70) 100%),
-          url("/website/images/Academy%20page%20image.png");
-        background-size: cover !important;
-        background-position: center !important;
       }
       .prog-hero-content {
         max-width: 100%;
@@ -313,25 +370,24 @@
       box-shadow: 0 4px 14px rgba(107, 88, 64, 0.35);
     }
 
-    /* ─── Warm Luxury Healthcare Course Cards ─── */
+    /* ─── Category Ring-Matched Course Cards ─── */
     .course-card {
-      background: rgba(255, 255, 255, 0.78);
+      background: var(--card-theme-bg, rgba(255, 255, 255, 0.88)) !important;
       backdrop-filter: blur(24px) saturate(190%);
       -webkit-backdrop-filter: blur(24px) saturate(190%);
-      border: 1.5px solid rgba(255, 255, 255, 0.92);
+      border: 1.5px solid var(--card-theme-border, rgba(255, 255, 255, 0.92)) !important;
       border-radius: 22px;
       padding: 24px;
       display: flex;
       flex-direction: column;
-      box-shadow: var(--shadow-glass);
+      box-shadow: 0 10px 30px var(--card-theme-glow, rgba(0, 0, 0, 0.08)), inset 0 1px 2px rgba(255, 255, 255, 0.9) !important;
       transition: transform 0.26s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.26s ease, border-color 0.26s ease, background 0.26s ease;
       position: relative;
     }
     .course-card:hover {
       transform: translateY(-6px);
-      box-shadow: 0 16px 48px -12px rgba(139, 115, 85, 0.25), 0 0 0 1px rgba(232, 196, 160, 0.50);
-      border-color: rgba(232, 196, 160, 0.70);
-      background: rgba(255, 255, 255, 0.90);
+      box-shadow: 0 18px 48px var(--card-theme-glow, rgba(0, 0, 0, 0.18)), 0 0 0 1px var(--card-theme-border-hover, #1D4ED8) !important;
+      border-color: var(--card-theme-border-hover, #1D4ED8) !important;
     }
     .card-head {
       display: flex;
@@ -370,9 +426,9 @@
       display: inline-block;
       padding: 5px 13px;
       border-radius: 99px;
-      background: rgba(201, 168, 76, 0.12);
-      border: 1px solid rgba(201, 168, 76, 0.28);
-      color: var(--color-warm-brown-dark);
+      background: var(--card-theme-badge-bg, rgba(255, 255, 255, 0.92)) !important;
+      border: 1px solid var(--card-theme-badge-border, rgba(59, 130, 246, 0.4)) !important;
+      color: var(--card-theme-badge-color, #104B8C) !important;
       font-size: 11.5px;
       font-weight: 600;
       white-space: nowrap;
@@ -381,47 +437,21 @@
     .course-title {
       font-family: var(--font-display);
       font-size: 21px;
-      font-weight: 600;
-      color: var(--charcoal);
+      font-weight: 700;
+      color: var(--card-theme-title, #0F2D55) !important;
       margin: 0 0 10px;
       line-height: 1.25;
       cursor: pointer;
       transition: color 0.18s;
     }
-    .course-title:hover { color: var(--color-warm-brown); }
-    .course-for {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      background: rgba(245, 240, 232, 0.85);
-      border: 1px solid var(--beige-dark);
-      border-radius: 8px;
-      padding: 4px 10px;
-      font-size: 12px;
-      font-weight: 500;
-      color: var(--charcoal-soft);
-      margin-bottom: 12px;
-      width: fit-content;
-    }
-    .course-meta {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      margin-bottom: 14px;
-      font-size: 12.5px;
-      color: var(--warm-gray);
-    }
-    .course-meta span {
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
-    }
+    .course-title:hover { color: var(--card-theme-border-hover, #2563EB) !important; }
     .course-desc {
-      color: var(--charcoal-soft);
+      color: var(--card-theme-desc, #1F2937) !important;
       font-size: 13.5px;
       line-height: 1.6;
       margin: 0 0 18px;
       flex: 1;
+      font-weight: 500;
     }
     .card-footer {
       display: flex;
@@ -461,7 +491,7 @@
   <!-- Sticky Navbar -->
   <nav id="navbar">
     <a class="lg" href="/" id="brand-link">
-      <img id="lgi" alt="OD AI HUB Logo" width="42" height="42" src="/static/logo.jpg" />
+      <img id="lgi" alt="OD AI HUB Logo" width="42" height="42" src="/website/images/od_ai_hub_logo_circle.png" />
       <span>OD AI HUB<small>Learn • Build • Innovate • Scale</small></span>
     </a>
 
@@ -585,6 +615,7 @@
   <!-- Scripts -->
   <script src="/website/js/assets.js"></script>
   <script src="/website/js/api.js"></script>
+  <script src="/website/js/customization-sync.js"></script>
   <script src="/website/js/enquiry.js"></script>
   <script>
     // ── Medisphere-style course icon mapper ──
@@ -651,6 +682,372 @@
       return '#' + [r,g,b].map(v => v.toString(16).padStart(2,'0')).join('');
     }
 
+    const CATEGORY_PALETTES = {
+      school: {
+        cardBg: 'linear-gradient(160deg, #FFFFFF 0%, #EFF6FF 35%, #F4F0E8 75%, #D7EBFF 100%)',
+        border: 'rgba(96, 165, 250, 0.85)',
+        borderHover: '#1D4ED8',
+        glow: 'rgba(37, 99, 235, 0.35)',
+        title: '#0F2D55',
+        desc: '#1E3A8A',
+        btnBg: 'linear-gradient(135deg, #1D4ED8 0%, #1E40AF 100%)',
+        btnColor: '#FFFFFF',
+        badgeBg: 'rgba(219, 234, 254, 0.95)',
+        badgeColor: '#1D4ED8',
+        badgeBorder: 'rgba(59, 130, 246, 0.4)',
+        pageBg: 'linear-gradient(180deg, #F0F7FF 0%, #FFFFFF 38%, #E0EFFF 70%, #F4F0E8 100%)',
+        heroBg: 'linear-gradient(160deg, rgba(15,45,85,0.84) 0%, rgba(29,78,216,0.78) 40%, rgba(37,99,235,0.80) 75%, rgba(96,165,250,0.72) 100%)'
+      },
+      diploma: {
+        cardBg: 'linear-gradient(160deg, #FFFFFF 0%, #F0FDF4 35%, #DCFCE7 75%, #BBF7D0 100%)',
+        border: 'rgba(74, 222, 128, 0.85)',
+        borderHover: '#059669',
+        glow: 'rgba(16, 185, 129, 0.35)',
+        title: '#064E3B',
+        desc: '#065F46',
+        btnBg: 'linear-gradient(135deg, #059669 0%, #064E3B 100%)',
+        btnColor: '#FFFFFF',
+        badgeBg: 'rgba(209, 250, 229, 0.95)',
+        badgeColor: '#064E3B',
+        badgeBorder: 'rgba(34, 197, 94, 0.4)',
+        pageBg: 'linear-gradient(180deg, #F0FDF4 0%, #FFFFFF 38%, #E0F2FE 70%, #DCFCE7 100%)',
+        heroBg: 'linear-gradient(160deg, rgba(2,44,34,0.86) 0%, rgba(6,78,59,0.80) 40%, rgba(5,150,105,0.78) 75%, rgba(16,185,129,0.70) 100%)'
+      },
+      college: {
+        cardBg: 'linear-gradient(160deg, #FFFFFF 0%, #FAF5FF 35%, #F3E8FF 75%, #E9D5FF 100%)',
+        border: 'rgba(167, 139, 250, 0.85)',
+        borderHover: '#7C3AED',
+        glow: 'rgba(139, 92, 246, 0.35)',
+        title: '#4C1D95',
+        desc: '#5B21B6',
+        btnBg: 'linear-gradient(135deg, #7C3AED 0%, #5B21B6 100%)',
+        btnColor: '#FFFFFF',
+        badgeBg: 'rgba(237, 233, 254, 0.95)',
+        badgeColor: '#5B21B6',
+        badgeBorder: 'rgba(139, 92, 246, 0.4)',
+        pageBg: 'linear-gradient(180deg, #FAF5FF 0%, #FFFFFF 38%, #EFF6FF 70%, #F3E8FF 100%)',
+        heroBg: 'linear-gradient(160deg, rgba(46,16,101,0.86) 0%, rgba(91,33,182,0.80) 40%, rgba(124,58,237,0.78) 75%, rgba(167,139,250,0.70) 100%)'
+      },
+      'non-tech': {
+        cardBg: 'linear-gradient(160deg, #FFFFFF 0%, #FFF7ED 35%, #FFEDD5 75%, #FED7AA 100%)',
+        border: 'rgba(251, 146, 60, 0.85)',
+        borderHover: '#EA580C',
+        glow: 'rgba(249, 115, 22, 0.35)',
+        title: '#7C2D12',
+        desc: '#9A3412',
+        btnBg: 'linear-gradient(135deg, #EA580C 0%, #C2410C 100%)',
+        btnColor: '#FFFFFF',
+        badgeBg: 'rgba(255, 237, 213, 0.95)',
+        badgeColor: '#9A3412',
+        badgeBorder: 'rgba(249, 115, 22, 0.4)',
+        pageBg: 'linear-gradient(180deg, #FFF7ED 0%, #FFFFFF 38%, #EFF6FF 70%, #FFEDD5 100%)',
+        heroBg: 'linear-gradient(160deg, rgba(67,20,7,0.86) 0%, rgba(154,52,18,0.80) 40%, rgba(234,88,12,0.78) 75%, rgba(251,146,60,0.70) 100%)'
+      },
+      internships: {
+        cardBg: 'linear-gradient(160deg, #FFFFFF 0%, #FFFBEB 35%, #FEF3C7 75%, #FDE68A 100%)',
+        border: 'rgba(245, 158, 11, 0.85)',
+        borderHover: '#D97706',
+        glow: 'rgba(234, 179, 8, 0.35)',
+        title: '#78350F',
+        desc: '#854D0E',
+        btnBg: 'linear-gradient(135deg, #D97706 0%, #B45309 100%)',
+        btnColor: '#FFFFFF',
+        badgeBg: 'rgba(254, 243, 199, 0.95)',
+        badgeColor: '#854D0E',
+        badgeBorder: 'rgba(234, 179, 8, 0.4)',
+        pageBg: 'linear-gradient(180deg, #FFFBEB 0%, #FFFFFF 38%, #EFF6FF 70%, #FEF3C7 100%)',
+        heroBg: 'linear-gradient(160deg, rgba(69,26,3,0.86) 0%, rgba(133,77,14,0.80) 40%, rgba(217,119,6,0.78) 70%, rgba(251,191,36,0.70) 100%)'
+      },
+      career: {
+        cardBg: 'linear-gradient(160deg, #FFFFFF 0%, #FFF0F5 35%, #FCE7F3 75%, #FBCFE8 100%)',
+        border: 'rgba(244, 114, 182, 0.85)',
+        borderHover: '#E11D48',
+        glow: 'rgba(225, 29, 72, 0.35)',
+        title: '#881337',
+        desc: '#9F1239',
+        btnBg: 'linear-gradient(135deg, #DC2626 0%, #B91C1C 100%)',
+        btnColor: '#FFFFFF',
+        badgeBg: 'rgba(254, 226, 226, 0.95)',
+        badgeColor: '#BE123C',
+        badgeBorder: 'rgba(244, 114, 182, 0.4)',
+        pageBg: 'linear-gradient(180deg, #FDF2F8 0%, #FFFFFF 38%, #EFF6FF 70%, #FCE7F3 100%)',
+        heroBg: 'linear-gradient(160deg, rgba(76,5,25,0.86) 0%, rgba(136,19,55,0.80) 40%, rgba(225,29,72,0.78) 70%, rgba(251,113,133,0.70) 100%)'
+      }
+    };
+
+    const FALLBACK_COURSES = {
+      school: [
+        {
+          id: 'sch-1',
+          slug: 'ai-explorer-coding-school',
+          title: 'AI Explorer & Creative Computing',
+          group_label: 'Class 5–7',
+          target_audience: 'Class 5 to 7 Students',
+          duration_formatted: '8 Weeks',
+          mode: 'hybrid',
+          batch_size: 20,
+          short_description: 'Visual programming, Scratch logic, AI image generation, and creative problem solving taught through playful games.',
+          price_display: '₹3,999',
+          discount_display: '₹2,499'
+        },
+        {
+          id: 'sch-2',
+          slug: 'junior-robotics-iot-school',
+          title: 'Junior Robotics & IoT Builders',
+          group_label: 'Class 6–8',
+          target_audience: 'Class 6 to 8 Students',
+          duration_formatted: '10 Weeks',
+          mode: 'offline',
+          batch_size: 15,
+          short_description: 'Build real electronic circuits, smart sensors, and obstacle-avoiding robot cars using microcontrollers and live kits.',
+          price_display: '₹4,999',
+          discount_display: '₹2,999'
+        },
+        {
+          id: 'sch-3',
+          slug: 'python-coding-game-design',
+          title: 'Python Coding & 2D Game Design',
+          group_label: 'Class 8–10',
+          target_audience: 'Class 8 to 10 Students',
+          duration_formatted: '12 Weeks',
+          mode: 'hybrid',
+          batch_size: 25,
+          short_description: 'Clean Python syntax, algorithms, Pygame development, and interactive apps designed for middle & high school learners.',
+          price_display: '₹5,499',
+          discount_display: '₹3,499'
+        },
+        {
+          id: 'sch-4',
+          slug: 'future-tech-ai-foundations',
+          title: 'Future Tech & AI Foundations',
+          group_label: 'Class 9–12',
+          target_audience: 'Class 9 to 12 Students',
+          duration_formatted: '12 Weeks',
+          mode: 'online',
+          batch_size: 30,
+          short_description: 'Foundations of artificial intelligence, neural networks intuition, prompt engineering, and digital ethics for senior schoolers.',
+          price_display: '₹6,000',
+          discount_display: '₹3,999'
+        }
+      ],
+      diploma: [
+        {
+          id: 'dip-1',
+          slug: 'full-stack-web-dev-diploma',
+          title: 'Full-Stack Web Development Diploma',
+          group_label: 'Diploma Track',
+          target_audience: 'Diploma & Job Seekers',
+          duration_formatted: '6 Months',
+          mode: 'hybrid',
+          batch_size: 25,
+          short_description: 'Master HTML5, CSS3, JavaScript, React, Node.js, and PostgreSQL. Build 5 production portfolio apps ready for industry hiring.',
+          price_display: '₹24,999',
+          discount_display: '₹14,999'
+        },
+        {
+          id: 'dip-2',
+          slug: 'cloud-devops-diploma',
+          title: 'Cloud & DevOps Engineering Diploma',
+          group_label: 'Diploma Track',
+          target_audience: 'Diploma Engineers',
+          duration_formatted: '6 Months',
+          mode: 'online',
+          batch_size: 20,
+          short_description: 'Hands-on Linux, Docker containers, Kubernetes, CI/CD pipelines, and AWS/GCP cloud hosting infrastructure.',
+          price_display: '₹26,000',
+          discount_display: '₹16,999'
+        },
+        {
+          id: 'dip-3',
+          slug: 'applied-ai-diploma',
+          title: 'Applied AI & Automation Diploma',
+          group_label: 'AI Track',
+          target_audience: 'Polytechnic & Diploma Graduates',
+          duration_formatted: '6 Months',
+          mode: 'hybrid',
+          batch_size: 20,
+          short_description: 'Build predictive machine learning models, custom AI chatbots, computer vision pipelines, and intelligent automations.',
+          price_display: '₹28,000',
+          discount_display: '₹17,999'
+        },
+        {
+          id: 'dip-4',
+          slug: 'data-analytics-bi-diploma',
+          title: 'Data Analytics & Business Intelligence',
+          group_label: 'Data Track',
+          target_audience: 'Diploma & Graduates',
+          duration_formatted: '4 Months',
+          mode: 'online',
+          batch_size: 30,
+          short_description: 'Master Excel, SQL querying, Power BI dashboards, and Python data visualization for high-demand business analyst roles.',
+          price_display: '₹18,000',
+          discount_display: '₹11,999'
+        }
+      ],
+      college: [
+        {
+          id: 'col-1',
+          slug: 'btech-ai-specialization',
+          title: 'B.Tech AI & Deep Learning Specialization',
+          group_label: 'B.Tech Specialization',
+          target_audience: 'B.Tech CSE/IT/ECE (Years 1–4)',
+          duration_formatted: '16 Weeks',
+          mode: 'hybrid',
+          batch_size: 30,
+          short_description: 'Neural networks, PyTorch, LLM fine-tuning, retrieval-augmented generation (RAG), and deployment to scalable cloud APIs.',
+          price_display: '₹19,999',
+          discount_display: '₹12,999'
+        },
+        {
+          id: 'col-2',
+          slug: 'bca-bsc-software-pathway',
+          title: 'BCA & B.Sc CS Software Engineering Pathway',
+          group_label: 'Degree Track',
+          target_audience: 'BCA & B.Sc Computer Science',
+          duration_formatted: '14 Weeks',
+          mode: 'hybrid',
+          batch_size: 30,
+          short_description: 'Data structures & algorithms in Java/C++, modern web APIs, PostgreSQL database design, and mock hiring interviews.',
+          price_display: '₹16,999',
+          discount_display: '₹11,499'
+        },
+        {
+          id: 'col-3',
+          slug: 'mca-msc-ai-curriculum',
+          title: 'MCA & M.Sc AI Research & Engineering',
+          group_label: 'Postgrad Track',
+          target_audience: 'MCA & M.Sc Computer Science',
+          duration_formatted: '16 Weeks',
+          mode: 'hybrid',
+          batch_size: 25,
+          short_description: 'Enterprise AI architecture, distributed systems, MLOps model pipelines, and publication-ready capstone thesis support.',
+          price_display: '₹22,000',
+          discount_display: '₹15,999'
+        },
+        {
+          id: 'col-4',
+          slug: 'cloud-microservices-track',
+          title: 'Cloud Architecture & Microservices Track',
+          group_label: 'Architecture Track',
+          target_audience: 'Pre-final & Final Year Students',
+          duration_formatted: '12 Weeks',
+          mode: 'online',
+          batch_size: 25,
+          short_description: 'Design resilient microservice clusters, event streams with Kafka, containerized deployments, and production monitoring.',
+          price_display: '₹19,000',
+          discount_display: '₹13,999'
+        }
+      ],
+      'non-tech': [
+        {
+          id: 'non-1',
+          slug: 'ai-for-business-mba',
+          title: 'AI for Business, MBA & Management',
+          group_label: 'Postgrad (MBA/BBA)',
+          target_audience: 'MBA, BBA & Management Students',
+          duration_formatted: '8 Weeks',
+          mode: 'online',
+          batch_size: 35,
+          short_description: 'No programming needed. Use generative AI, prompt engineering, predictive spreadsheets, and automated market research.',
+          price_display: '₹11,999',
+          discount_display: '₹6,999'
+        },
+        {
+          id: 'non-2',
+          slug: 'ai-finance-commerce',
+          title: 'AI for Commerce & Financial Accounting',
+          group_label: 'Undergrad (B.Com)',
+          target_audience: 'B.Com, M.Com & CA Aspirants',
+          duration_formatted: '8 Weeks',
+          mode: 'online',
+          batch_size: 30,
+          short_description: 'Automate balance sheet reconciliation, tax filing analytics, financial report summaries, and fraud detection flags.',
+          price_display: '₹10,500',
+          discount_display: '₹6,499'
+        },
+        {
+          id: 'non-3',
+          slug: 'generative-ai-office-skill',
+          title: 'Generative AI as a Workplace Skill',
+          group_label: 'All Degrees (BA/B.Sc/B.Com)',
+          target_audience: 'All Non-Tech Learners',
+          duration_formatted: '6 Weeks',
+          mode: 'online',
+          batch_size: 40,
+          short_description: 'Master ChatGPT, Claude, Microsoft Copilot, Midjourney, and Canva AI to 5x your daily productivity, emails, and presentations.',
+          price_display: '₹7,999',
+          discount_display: '₹4,999'
+        },
+        {
+          id: 'non-4',
+          slug: 'digital-marketing-content-ai',
+          title: 'Digital Marketing & AI Content Strategy',
+          group_label: 'Creative & Media',
+          target_audience: 'Arts, Media & Marketing Students',
+          duration_formatted: '8 Weeks',
+          mode: 'online',
+          batch_size: 30,
+          short_description: 'Create viral social content, SEO articles, targeted advertising copy, and customer outreach funnels with AI tools.',
+          price_display: '₹9,999',
+          discount_display: '₹5,999'
+        }
+      ],
+      internships: [
+        {
+          id: 'int-1',
+          slug: 'summer-winter-industry-internship',
+          title: 'Live Industry Project Internship (Summer/Winter)',
+          group_label: 'Verified Internship',
+          target_audience: 'College Students & Freshers',
+          duration_formatted: '8–12 Weeks',
+          mode: 'hybrid',
+          batch_size: 20,
+          short_description: 'Work alongside senior software architects on live client projects. Receive verified completion credentials and recommendation letters.',
+          price_display: 'Free for Selected',
+          discount_display: 'Stipend / Free'
+        },
+        {
+          id: 'int-2',
+          slug: 'agritech-telemetry-internship',
+          title: 'AgriTech & Rural Telemetry Innovation Lab',
+          group_label: 'R&D Internship',
+          target_audience: 'Engineers & Data Enthusiasts',
+          duration_formatted: '12 Weeks',
+          mode: 'offline',
+          batch_size: 12,
+          short_description: 'Deploy IoT moisture sensors, test soil telemetry devices across Ganjam farms, and analyze telemetry datasets.',
+          price_display: 'Grant-Funded',
+          discount_display: 'Grant-Funded'
+        },
+        {
+          id: 'int-3',
+          slug: 'healthtech-diagnostics-internship',
+          title: 'HealthTech Diagnostics & Clinical Data Lab',
+          group_label: 'Healthcare R&D',
+          target_audience: 'Biotech, CSE & Data Science',
+          duration_formatted: '10 Weeks',
+          mode: 'hybrid',
+          batch_size: 15,
+          short_description: 'Develop and evaluate medical imaging classification algorithms on anonymized diagnostic scans with clinical advisors.',
+          price_display: 'Sponsored',
+          discount_display: 'Sponsored'
+        },
+        {
+          id: 'int-4',
+          slug: 'smart-city-civic-tech-internship',
+          title: 'Smart Campus & Civic Tech Engineering',
+          group_label: 'System Development',
+          target_audience: 'ECE, CSE & IT Students',
+          duration_formatted: '12 Weeks',
+          mode: 'hybrid',
+          batch_size: 16,
+          short_description: 'Build automated smart campus attendance systems, energy consumption monitors, and civic grievance triage bots.',
+          price_display: 'Sponsored',
+          discount_display: 'Sponsored'
+        }
+      ]
+    };
+
     let allCategories = [];
     let currentCategorySlug = 'school';
     let currentGroupFilter = 'All';
@@ -665,12 +1062,12 @@
       allCategories = await window.odApi.getCategories();
       if (!allCategories || !allCategories.length) {
         allCategories = [
-          { id: 1, slug: 'school', name: 'School Programs', tagline: 'Spark curiosity early.', accent_color: '#A65A3A', icon_letter: 'S', description: 'AI, coding, robotics and future skills for Class 5 to 12, taught through play and projects.' },
-          { id: 2, slug: 'diploma', name: 'Diploma Programs', tagline: 'Skills employers want.', accent_color: '#68705A', icon_letter: 'D', description: 'Job-oriented technology diplomas for learners who want to start working sooner.' },
-          { id: 3, slug: 'college', name: 'College Programs', tagline: 'Go beyond the syllabus.', accent_color: '#8C684B', icon_letter: 'C', description: 'Industry tracks that sit alongside your degree, with real tools and real projects.' },
-          { id: 4, slug: 'non-tech', name: 'Non-Tech Programs', tagline: 'AI for every field.', accent_color: '#8F4A2D', icon_letter: 'N', description: 'No coding background needed. Learn how to use AI in your own field and career.' },
-          { id: 5, slug: 'internships', name: 'Internships and Industry Projects', tagline: 'Real work, real experience.', accent_color: '#A65A3A', icon_letter: 'I', description: 'Work on live projects with industry partners and build a portfolio employers notice.' },
-          { id: 6, slug: 'career', name: 'Career and Placement Support', tagline: 'Get ready. Get hired.', accent_color: '#8F4A2D', icon_letter: 'P', description: 'Interview preparation, mock tests, resume building and career guidance to turn skills into a job.' }
+          { id: 1, slug: 'school', name: 'School Programs', tagline: 'Spark curiosity early.', accent_color: '#2563EB', icon_letter: 'S', description: 'AI, coding, robotics and future skills for Class 5 to 12, taught through play and projects.' },
+          { id: 2, slug: 'diploma', name: 'Diploma Programs', tagline: 'Skills employers want.', accent_color: '#10B981', icon_letter: 'D', description: 'Job-oriented technology diplomas for learners who want to start working sooner.' },
+          { id: 3, slug: 'college', name: 'College Programs', tagline: 'Go beyond the syllabus.', accent_color: '#7C3AED', icon_letter: 'C', description: 'Industry tracks that sit alongside your degree, with real tools and real projects.' },
+          { id: 4, slug: 'non-tech', name: 'Non-Tech Programs', tagline: 'AI for every field.', accent_color: '#EA580C', icon_letter: 'N', description: 'No coding background needed. Learn how to use AI in your own field and career.' },
+          { id: 5, slug: 'internships', name: 'Internships and Industry Projects', tagline: 'Real work, real experience.', accent_color: '#D97706', icon_letter: 'I', description: 'Work on live projects with industry partners and build a portfolio employers notice.' },
+          { id: 6, slug: 'career', name: 'Career and Placement Support', tagline: 'Get ready. Get hired.', accent_color: '#DC2626', icon_letter: 'P', description: 'Interview preparation, mock tests, resume building and career guidance to turn skills into a job.' }
         ];
       }
 
@@ -710,14 +1107,97 @@
         window.history.pushState({ category: slug }, '', newUrl);
       }
 
+      const pal = CATEGORY_PALETTES[slug] || CATEGORY_PALETTES.school;
+      document.body.className = `prog-cat-${slug}`;
+      document.body.setAttribute('data-category', slug);
+      
+      // Set solid page background matching card theme — never white!
+      const pageBg = pal.pageBg || '#EFF6FF';
+      document.body.style.setProperty('background', pageBg, 'important');
+      document.body.style.setProperty('background-color', pageBg, 'important');
+
+      const heroEl = document.getElementById('prog-hero');
+      if (heroEl) {
+        // High-contrast, vibrant hero background matching the exact card color theme from 3D ring!
+        const heroThemeSolidColors = {
+          school: '#0F2D55',
+          diploma: '#064E3B',
+          college: '#2E1065',
+          'non-tech': '#431407',
+          internships: '#451A03',
+          career: '#4C0519'
+        };
+        const heroThemeGrads = {
+          school: 'linear-gradient(135deg, #0A192F 0%, #0F2D55 35%, #1D4ED8 70%, #2563EB 100%)',
+          diploma: 'linear-gradient(135deg, #022C22 0%, #064E3B 35%, #047857 70%, #059669 100%)',
+          college: 'linear-gradient(135deg, #1E1035 0%, #2E1065 35%, #5B21B6 70%, #7C3AED 100%)',
+          'non-tech': 'linear-gradient(135deg, #2D0F07 0%, #431407 35%, #9A3412 70%, #EA580C 100%)',
+          internships: 'linear-gradient(135deg, #291403 0%, #451A03 35%, #92400E 70%, #D97706 100%)',
+          career: 'linear-gradient(135deg, #380410 0%, #4C0519 35%, #9F1239 70%, #DC2626 100%)'
+        };
+        const activeHeroGrad = heroThemeGrads[slug] || heroThemeGrads.school;
+        const solidColor = heroThemeSolidColors[slug] || heroThemeSolidColors.school;
+        // Always set solid background-color FIRST so the hero NEVER shows white
+        heroEl.style.setProperty('background-color', solidColor, 'important');
+        heroEl.style.setProperty('background', activeHeroGrad, 'important');
+        heroEl.style.setProperty('background-image', `${activeHeroGrad}, url("/website/images/Academy.png")`, 'important');
+        heroEl.style.setProperty('background-size', 'cover', 'important');
+        heroEl.style.setProperty('background-position', 'center right', 'important');
+        heroEl.style.setProperty('background-blend-mode', 'overlay', 'important');
+        heroEl.style.setProperty('color', '#FFFFFF', 'important');
+        heroEl.style.setProperty('min-height', '520px', 'important');
+      }
+
+      // Dynamic header / navbar for programs page matching category card
+      const navEl = document.getElementById('navbar');
+      if (navEl) {
+        navEl.style.setProperty('background', pal.heroBg, 'important');
+        navEl.style.setProperty('border-bottom', `2px solid ${pal.border}`, 'important');
+        navEl.style.setProperty('box-shadow', `0 4px 24px ${pal.glow}`, 'important');
+
+        // Radiant high-contrast white & gold branding over dark category navbar
+        const brandLg = navEl.querySelector('.lg');
+        if (brandLg) {
+          brandLg.style.setProperty('color', '#FFFFFF', 'important');
+          const brandSpan = brandLg.querySelector('span');
+          if (brandSpan) brandSpan.style.setProperty('color', '#FFFFFF', 'important');
+          const brandSub = brandLg.querySelector('small, .lg-sub');
+          if (brandSub) brandSub.style.setProperty('color', '#FDE68A', 'important');
+        }
+        navEl.querySelectorAll('.lk a').forEach(a => {
+          if (!a.classList.contains('on')) {
+            a.style.setProperty('color', 'rgba(255, 255, 255, 0.92)', 'important');
+          }
+        });
+      }
+      const navEnqBtn = navEl ? navEl.querySelector('.nav-enq-btn') : null;
+      if (navEnqBtn) {
+        navEnqBtn.style.setProperty('background', pal.btnBg, 'important');
+        navEnqBtn.style.setProperty('color', pal.btnColor, 'important');
+        navEnqBtn.style.setProperty('border', `1px solid ${pal.border}`, 'important');
+      }
+      document.documentElement.style.setProperty('--card-theme-bg', pal.cardBg);
+      document.documentElement.style.setProperty('--card-theme-border', pal.border);
+      document.documentElement.style.setProperty('--card-theme-border-hover', pal.borderHover);
+      document.documentElement.style.setProperty('--card-theme-glow', pal.glow);
+      document.documentElement.style.setProperty('--card-theme-title', pal.title);
+      document.documentElement.style.setProperty('--card-theme-desc', pal.desc);
+      document.documentElement.style.setProperty('--card-theme-btn-bg', pal.btnBg);
+      document.documentElement.style.setProperty('--card-theme-btn-color', pal.btnColor);
+      document.documentElement.style.setProperty('--card-theme-badge-bg', pal.badgeBg);
+      document.documentElement.style.setProperty('--card-theme-badge-color', pal.badgeColor);
+      document.documentElement.style.setProperty('--card-theme-badge-border', pal.badgeBorder);
+
       // Update hero banner texts and color
       const cat = allCategories.find(c => c.slug === slug) || { name: 'Programs', description: 'Explore curriculum' };
-      const accent = cat.accent_color || '#A65A3A';
+      const accent = pal.btnBg;
 
       // Update active program badge
       const badge = document.getElementById('program-active-badge');
       if (badge) {
-        badge.style.background = accent;
+        badge.style.background = pal.badgeBg;
+        badge.style.color = pal.badgeColor;
+        badge.style.border = `1px solid ${pal.badgeBorder}`;
         const iconEl = document.getElementById('badge-icon-letter');
         if (iconEl) iconEl.textContent = cat.icon_letter || '🎓';
         const titleEl = document.getElementById('badge-program-title');
@@ -728,25 +1208,36 @@
         searchInput.placeholder = `Search within ${cat.name}...`;
       }
 
-      const heroEl = document.getElementById('prog-hero');
-      if (heroEl) {
-        heroEl.style.setProperty('--accent-mid', darkenHex(accent, 0.25));
-        heroEl.style.setProperty('--accent-dark', darkenHex(accent, 0.55));
+      const trackBadge = document.getElementById('track-badge');
+      if (trackBadge) {
+        trackBadge.style.borderColor = pal.border;
+        trackBadge.style.background = pal.badgeBg;
+        trackBadge.style.color = pal.badgeColor;
       }
-      document.getElementById('track-badge').style.borderColor = accent;
-      document.getElementById('track-badge').style.background = accent + '22';
-      document.getElementById('track-icon').textContent = cat.icon_letter || '🎓';
-      document.getElementById('track-name').textContent = `${cat.name} Catalog`;
+      const trackIcon = document.getElementById('track-icon');
+      if (trackIcon) trackIcon.textContent = cat.icon_letter || '🎓';
+      const trackName = document.getElementById('track-name');
+      if (trackName) trackName.textContent = `${cat.name} Catalog`;
       const titleEl = document.getElementById('track-title');
       if (titleEl) {
         titleEl.innerHTML = `<span class="track-title-main">${cat.name}</span><span class="track-title-sub">Course Catalog</span>`;
       }
-      document.getElementById('track-desc').textContent = cat.description || cat.tagline || '';
+      const descEl = document.getElementById('track-desc');
+      if (descEl) descEl.textContent = cat.description || cat.tagline || '';
 
-      // Show skeleton loader
+      // If career category, render career support tracks directly
+      if (slug === 'career') {
+        loadedCourses = [];
+        const chipsContainer = document.getElementById('group-chips');
+        if (chipsContainer) chipsContainer.style.display = 'none';
+        renderCareerTracks(cat, pal);
+        return;
+      }
+
+      // Show skeleton loader briefly
       const grid = document.getElementById('courses-grid');
       grid.innerHTML = Array(4).fill(0).map(() => `
-        <div class="course-card" style="min-height:260px;">
+        <div class="course-card" style="min-height:260px;background:${pal.cardBg} !important;border:1.5px solid ${pal.border} !important;">
           <div class="skel" style="height:20px;width:50%;margin-bottom:12px;"></div>
           <div class="skel" style="height:26px;width:80%;margin-bottom:16px;"></div>
           <div class="skel" style="height:60px;width:100%;margin-bottom:16px;"></div>
@@ -754,17 +1245,17 @@
         </div>
       `).join('');
 
-      // If career category, render career support tracks directly
-      if (slug === 'career') {
-        loadedCourses = [];
-        const chipsContainer = document.getElementById('group-chips');
-        if (chipsContainer) chipsContainer.style.display = 'none';
-        renderCareerTracks(cat, accent);
-        return;
+      // Fetch courses from API, fallback to curated courses if empty/offline
+      try {
+        const fetched = await window.odApi.getCategoryCourses(slug);
+        if (Array.isArray(fetched) && fetched.length > 0) {
+          loadedCourses = fetched;
+        } else {
+          loadedCourses = FALLBACK_COURSES[slug] || [];
+        }
+      } catch (err) {
+        loadedCourses = FALLBACK_COURSES[slug] || [];
       }
-
-      // Fetch courses from API
-      loadedCourses = await window.odApi.getCategoryCourses(slug);
 
       // Render group chips (audience/class/degree filters)
       const groups = ['All', ...new Set(loadedCourses.map(c => c.group_label).filter(Boolean))];
@@ -772,7 +1263,7 @@
       if (groups.length > 1) {
         chipsContainer.innerHTML = groups.map(g => `
           <button class="chp ${g === currentGroupFilter ? 'on' : ''}" 
-                  style="--c:${accent};"
+                  style="${g === currentGroupFilter ? `background:${pal.btnBg} !important;color:${pal.btnColor} !important;border-color:${pal.border} !important;` : ''}"
                   onclick="switchGroupFilter('${g}')">
             ${g}
           </button>
@@ -798,9 +1289,10 @@
       renderCourses();
     }
 
-    function renderCareerTracks(cat, accent) {
+    function renderCareerTracks(cat, pal) {
       const grid = document.getElementById('courses-grid');
       document.title = `${cat.name || 'Career Support'} – OD AI Academy`;
+      const p = pal || CATEGORY_PALETTES.career;
       const careerFeatures = [
         ['Interview Preparation', 'Mock interviews with industry mentors, curated technical question banks, and actionable feedback.', '🎙️'],
         ['Mock Hiring Tests', 'Aptitude, live coding, and system design tests designed to mirror Tier-1 company hiring rounds.', '📝'],
@@ -808,19 +1300,19 @@
         ['1-on-1 Career Mentorship', 'Private sessions with senior engineers to plan your target roles, roadmap, and transition steps.', '🎯']
       ];
       grid.innerHTML = careerFeatures.map((f, i) => `
-        <article class="course-card" style="--track-color:${accent};animation-delay:${i * 40}ms;">
+        <article class="course-card" style="background:${p.cardBg} !important; border:1.5px solid ${p.border} !important; box-shadow:0 8px 24px ${p.glow} !important; animation-delay:${i * 40}ms;">
           <div class="card-top-badges">
-            <span class="cat-badge" style="background:${accent}18;color:${accent};">Placement Track</span>
-            <span class="status-badge">✓ Active Support</span>
+            <span class="cat-badge" style="background:${p.badgeBg} !important; color:${p.badgeColor} !important; border-color:${p.badgeBorder} !important;">Placement Track</span>
+            <span class="status-badge" style="color:${p.title} !important; font-weight:700;">✓ Active Support</span>
           </div>
-          <h3 class="course-title" style="cursor:default;margin-top:8px;">
+          <h3 class="course-title" style="cursor:default;margin-top:8px;color:${p.title} !important;">
             ${f[2]} ${f[0]}
           </h3>
-          <p class="course-desc" style="margin-top:8px;">
+          <p class="course-desc" style="margin-top:8px;color:${p.desc} !important;font-weight:500;">
             ${f[1]}
           </p>
-          <div class="card-footer" style="padding-top:16px;">
-            <button class="btn" style="background:${accent};width:100%;justify-content:center;" onclick="openEnquiryModal('${f[0]} Consultation')">
+          <div class="card-footer" style="padding-top:16px;border-top-color:${p.border};">
+            <button class="btn" style="background:${p.btnBg} !important; color:${p.btnColor || '#FFFFFF'} !important; width:100%; justify-content:center; box-shadow:0 4px 14px ${p.glow} !important; border:none !important; border-radius:12px;" onclick="openEnquiryModal('${f[0]} Consultation')">
               Book Free Career Session →
             </button>
           </div>
@@ -831,7 +1323,7 @@
     function renderCourses() {
       const grid = document.getElementById('courses-grid');
       const cat = allCategories.find(c => c.slug === currentCategorySlug) || {};
-      const accent = cat.accent_color || '#A65A3A';
+      const pal = CATEGORY_PALETTES[currentCategorySlug] || CATEGORY_PALETTES.school;
       document.title = `${cat.name || 'Programs'} – OD AI Academy Course Catalog`;
       const query = (document.getElementById('course-search')?.value || '').toLowerCase().trim();
 
@@ -854,13 +1346,13 @@
 
       if (!list.length) {
         grid.innerHTML = `
-          <div style="grid-column:1/-1;text-align:center;padding:64px 20px;background:#fff;border-radius:16px;border:1.5px solid var(--ln);">
+          <div style="grid-column:1/-1;text-align:center;padding:64px 20px;background:#fff;border-radius:16px;border:1.5px solid ${pal.border};">
             <div style="font-size:36px;margin-bottom:12px;">📚</div>
-            <h3 style="font-size:20px;font-weight:800;color:var(--navy);margin-bottom:8px;">No courses found</h3>
-            <p style="color:var(--mu);font-size:14.5px;max-width:44ch;margin:0 auto 20px;">
+            <h3 style="font-size:20px;font-weight:800;color:${pal.title};margin-bottom:8px;">No courses found</h3>
+            <p style="color:${pal.desc};font-size:14.5px;max-width:44ch;margin:0 auto 20px;">
               ${query ? 'No courses match your search criteria. Try a different search keyword.' : 'We are currently preparing more programs for this track.'}
             </p>
-            <button class="btn" style="background:${accent};" onclick="openEnquiryModal('${cat.name || 'Academy'} Programs', null, '${cat.slug || ''}')">
+            <button class="btn" style="background:${pal.btnBg} !important; color:${pal.btnColor} !important;" onclick="openEnquiryModal('${cat.name || 'Academy'} Programs', null, '${cat.slug || ''}')">
               Enquire about upcoming batches →
             </button>
           </div>
@@ -869,28 +1361,27 @@
       }
 
       grid.innerHTML = list.map((c, i) => `
-        <article class="course-card" style="--track-color:${accent};animation-delay:${i * 40}ms;">
+        <article class="course-card" style="background:${pal.cardBg} !important; border:1.5px solid ${pal.border} !important; box-shadow:0 8px 24px ${pal.glow} !important; animation-delay:${i * 40}ms;">
 
-          <!-- Medisphere-style: icon box (left) + category pill (right) -->
           <div class="card-head">
-            <div class="course-icon-box">
-              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">${getCourseIcon(c.title)}</svg>
+            <div class="course-icon-box" style="background:${pal.badgeBg} !important; border:1px solid ${pal.border} !important;">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="stroke:${pal.title} !important;">${getCourseIcon(c.title)}</svg>
             </div>
-            <span class="cat-badge">${c.category_name || cat.name}</span>
+            <span class="cat-badge" style="background:${pal.badgeBg} !important; color:${pal.badgeColor} !important; border-color:${pal.badgeBorder} !important;">${c.category_name || cat.name}</span>
           </div>
 
-          <h3 class="course-title" onclick="openCourseDrawer('${c.slug}')" title="Click to view details">
+          <h3 class="course-title" style="color:${pal.title} !important;" onclick="openCourseDrawer('${c.slug}')" title="Click to view details">
             ${c.title}
           </h3>
 
           ${c.group_label || c.target_audience ? `
-            <div class="course-for">
-              <svg viewBox="0 0 24 24" width="11" height="11" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+            <div class="course-for" style="background:${pal.badgeBg} !important; color:${pal.title} !important; border-color:${pal.border} !important;">
+              <svg viewBox="0 0 24 24" width="11" height="11" fill="none" stroke="${pal.title}" stroke-width="2" stroke-linecap="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
               ${c.group_label || c.target_audience}
             </div>
           ` : ''}
 
-          <div class="course-meta">
+          <div class="course-meta" style="color:${pal.desc};">
             <span>
               <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
               ${c.duration_formatted || 'Flexible'}
@@ -902,18 +1393,18 @@
             ${c.batch_size ? `<span><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg> ${c.batch_size} seats</span>` : ''}
           </div>
 
-          <p class="course-desc">${c.short_description || ''}</p>
+          <p class="course-desc" style="color:${pal.desc} !important;">${c.short_description || ''}</p>
 
-          <div class="card-footer">
+          <div class="card-footer" style="border-top-color:${pal.border};">
             <div class="card-pricing">
-              <b>${c.discount_display || c.price_display}</b>
-              ${c.discount_display ? `<s>${c.price_display}</s>` : ''}
+              <b style="color:${pal.title} !important;">${c.discount_display || c.price_display}</b>
+              ${c.discount_display ? `<s style="color:${pal.desc};">${c.price_display}</s>` : ''}
             </div>
             <div style="display:flex;gap:8px;align-items:center;">
-              <button class="btn o" style="padding:7px 14px;font-size:12px;border:1.5px solid var(--beige-dark);color:var(--charcoal);background:rgba(255,255,255,0.70);backdrop-filter:blur(8px);border-radius:10px;" onclick="openCourseDrawer('${c.slug}')">
+              <button class="btn o" style="padding:7px 14px;font-size:12px;border:1.5px solid ${pal.border};color:${pal.title};background:rgba(255,255,255,0.85);border-radius:10px;" onclick="openCourseDrawer('${c.slug}')">
                 Details
               </button>
-              <button class="btn" style="padding:7px 16px;font-size:12px;border-radius:10px;background:linear-gradient(135deg,var(--color-warm-brown) 0%,var(--color-warm-brown-dark) 100%);box-shadow:0 4px 12px rgba(107,88,64,0.30);" data-enq="${c.title}" data-course-id="${c.id}" data-category="${c.category_slug || currentCategorySlug || ''}" data-audience="${c.group_label || c.target_audience || ''}">
+              <button class="btn" style="padding:7px 16px;font-size:12px;border-radius:10px;background:${pal.btnBg} !important;color:${pal.btnColor} !important;box-shadow:0 4px 12px ${pal.glow} !important;border:none !important;" data-enq="${c.title}" data-course-id="${c.id}" data-category="${c.category_slug || currentCategorySlug || ''}" data-audience="${c.group_label || c.target_audience || ''}">
                 Enquire →
               </button>
             </div>

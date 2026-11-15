@@ -72,6 +72,14 @@ export const academyAdminApi = {
     const res = await api.patch(`/admin/academy/enquiries/${id}/status`, { status });
     return res.data;
   },
+  updateEnquiry: async (id, data) => {
+    const res = await api.put(`/admin/academy/enquiries/${id}`, data);
+    return res.data;
+  },
+  deleteEnquiry: async (id) => {
+    const res = await api.delete(`/admin/academy/enquiries/${id}`);
+    return res.data;
+  },
   downloadEnquiriesCsv: async (status = 'all') => {
     const res = await api.get('/admin/academy/enquiries/export/csv', {
       params: status !== 'all' ? { status } : {},

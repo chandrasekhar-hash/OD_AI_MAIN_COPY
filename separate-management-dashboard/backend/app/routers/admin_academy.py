@@ -7,7 +7,7 @@ from app.crud import academy_crud
 from app.schemas.academy import (
     AcademyCategoryCreate, AcademyCategoryUpdate, AcademyCategoryResponse,
     AcademyCourseCreate, AcademyCourseUpdate, AcademyCourseResponse,
-    EnquiryResponse, EnquiryStatusUpdate,
+    EnquiryResponse, EnquiryStatusUpdate, EnquiryUpdate,
     StatCreate, StatUpdate, StatResponse,
     TestimonialCreate, TestimonialUpdate, TestimonialResponse,
     FaqCreate, FaqUpdate, FaqResponse
@@ -189,6 +189,23 @@ def admin_update_enquiry_status(id: int, data: EnquiryStatusUpdate, db: Session 
     if e.course:
         res.course_title = e.course.title or e.course.name
     return res
+
+@router.put("/enquiries/{id}", response_model=EnquiryResponse)
+def admin_update_enquiry(id: int, data: EnquiryUpdate, db: Session = Depends(get_db), current_user=Depends(require_role(["admin", "editor"]))):
+    e = academy_crud.update_enquiry(db, id, data)
+    if not e:
+        raise HTTPException(status_code=404, detail="Enquiry not found")
+    res = EnquiryResponse.from_orm(e)
+    if e.course:
+        res.course_title = e.course.title or e.course.name
+    return res
+
+@router.delete("/enquiries/{id}")
+def admin_delete_enquiry(id: int, db: Session = Depends(get_db), current_user=Depends(require_role(["admin", "editor"]))):
+    success = academy_crud.delete_enquiry(db, id)
+    if not success:
+        raise HTTPException(status_code=404, detail="Enquiry not found")
+    return {"message": "Enquiry deleted successfully", "id": id}
 
 @router.get("/enquiries/export/csv")
 def admin_export_enquiries_csv(status: Optional[str] = None, db: Session = Depends(get_db), current_user=Depends(require_role(["admin", "editor"]))):

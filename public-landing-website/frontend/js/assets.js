@@ -285,7 +285,7 @@
 
   window.IMG = {
     hero: pillarCovers[0],
-    logo: "/static/logo.jpg",
+    logo: "/website/images/od_ai_hub_logo_circle.png",
     map: odishaMap,
     c: pillarCovers,
     cat: categoryCovers,

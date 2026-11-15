@@ -46,16 +46,16 @@ const ManagementNavbar = () => {
               ☀️
             </button>
 
-            {/* Link to Public Portal */}
+            {/* Links to Public Portals */}
             <a
-              href="http://localhost:5000"
+              href="http://localhost:5050"
               target="_blank"
               rel="noopener noreferrer"
-              className="hidden md:inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-on-surface-variant hover:text-primary hover:bg-surface-container-high rounded-lg transition-colors border border-outline-variant/40"
-              title="Open Public Website on port 5000"
+              className="hidden lg:inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold text-blue-700 bg-blue-50 hover:bg-blue-100 rounded-lg transition-colors border border-blue-200"
+              title="Open JS Public Website on port 5050"
             >
-              <span className="material-symbols-outlined text-base">open_in_new</span>
-              <span>Open Public Site (5000)</span>
+              <span className="material-symbols-outlined text-base">desktop_windows</span>
+              <span>Public Site (:5050)</span>
             </a>
 
             {/* Auth section */}
@@ -76,12 +76,18 @@ const ManagementNavbar = () => {
               </div>
             ) : (
               <div className="flex items-center gap-2">
-                <button
-                  onClick={() => openAuthModal('login')}
-                  className="font-label text-xs font-bold px-4 py-2 rounded-xl bg-primary text-on-primary hover:bg-primary/90 transition-all shadow-sm"
+                <Link
+                  to="/login"
+                  className="font-label text-xs font-semibold px-3.5 py-1.5 rounded-xl border border-outline-variant hover:bg-surface-container-high text-on-surface transition-all shadow-xs"
                 >
                   Sign In
-                </button>
+                </Link>
+                <Link
+                  to="/signup"
+                  className="font-label text-xs font-bold px-3.5 py-1.5 rounded-xl bg-primary text-on-primary hover:bg-primary/90 transition-all shadow-sm"
+                >
+                  Sign Up
+                </Link>
               </div>
             )}
           </div>

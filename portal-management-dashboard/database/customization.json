@@ -1,0 +1,26 @@
+{
+  "theme_mode": "light",
+  "logo_url": "/website/images/od_ai_hub_logo_circle.png",
+  "backgrounds": {
+    "home_hero": "",
+    "academy": "/website/images/Academy.png",
+    "technologies": "/website/images/Techno.png",
+    "innovation_lab": "/website/images/Innovation.png",
+    "startups": "/website/images/Strtups.png",
+    "for_business": "/website/images/Business.png",
+    "for_institutions": "/website/images/Institutions.png",
+    "events": "/website/images/Events.png",
+    "success_stories": "/website/images/Sucess%20Stories.png",
+    "about": "/website/images/About.png",
+    "blog": "/website/images/River%20City%20at%20Blue%20Hour.png"
+  },
+  "ring_colors": {
+    "home": ["#A65A3A", "#68705A", "#8C684B", "#8F4A2D", "#2563EB"],
+    "academy": ["#A65A3A", "#0D9488", "#4F46E5", "#8F4A2D", "#059669", "#D97706"]
+  },
+  "text_colors": {
+    "heading": "#FFFFFF",
+    "subheading": "#F8CB58",
+    "body": "#FAF7F2"
+  }
+}

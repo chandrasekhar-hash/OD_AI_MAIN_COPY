@@ -1,0 +1,295 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>About OD AI HUB – Roots, Mission & Vision (Berhampur, Odisha)</title>
+  <meta name="description" content="OD AI HUB is an AI talent-to-innovation ecosystem empowering learners, innovators, and enterprises from Berhampur, Odisha to the world." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/website/css/style.css?v=2026_v4" />
+  <link rel="stylesheet" href="/website/css/page-themes.css?v=2026_themes_v6" />
+  <script src="/website/js/assets.js"></script>
+  <script src="/website/js/api.js"></script>
+  <script src="/website/js/customization-sync.js"></script>
+  <style>
+    body {
+      background-color: #EFF6FF;
+      background-image: url("/website/images/Body.png");
+      background-blend-mode: multiply;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    .about-hero {
+      background: linear-gradient(135deg, #0A192F 0%, #0F2D55 35%, #1D4ED8 70%, #2563EB 100%) !important;
+      background-image:
+        linear-gradient(135deg, rgba(10, 25, 47, 0.92) 0%, rgba(15, 45, 85, 0.85) 40%, rgba(29, 78, 216, 0.65) 100%),
+        url("/website/images/River%20City%20at%20Blue%20Hour.png") !important;
+      background-size: cover !important;
+      background-position: center right !important;
+      background-repeat: no-repeat !important;
+      color: #FFFFFF !important;
+      min-height: 520px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: calc(var(--nav-height, 64px) + clamp(24px, 4vh, 48px)) clamp(24px, 5vw, 64px) 48px;
+      position: relative;
+      border-bottom: 2px solid rgba(255, 255, 255, 0.20);
+    }
+    .about-hero-container {
+      max-width: 1240px;
+      width: 100%;
+      margin: 0 auto;
+    }
+    .about-hero-tagline {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 16px;
+      border-radius: 99px;
+      background: rgba(201, 168, 76, 0.18);
+      border: 1px solid rgba(201, 168, 76, 0.4);
+      color: #FDE68A;
+      font-size: 11.5px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 18px;
+    }
+    .about-hero h1 {
+      font-family: var(--font-display, "Cormorant Garamond", Georgia, serif);
+      font-size: clamp(36px, 5vw, 62px);
+      font-weight: 400;
+      line-height: 1.15;
+      margin: 0 0 16px;
+      color: #FFFFFF;
+      text-shadow: 0 2px 20px rgba(0, 0, 0, 0.5);
+    }
+    .about-hero h1 em {
+      font-style: italic;
+      color: #FDE68A;
+    }
+    .about-hero p {
+      max-width: 58ch;
+      font-size: 16px;
+      line-height: 1.68;
+      color: rgba(255, 255, 255, 0.92);
+      margin: 0 0 28px;
+    }
+    .about-content-body {
+      max-width: 1240px;
+      margin: 48px auto 80px;
+      padding: 0 clamp(20px, 4vw, 40px);
+      width: 100%;
+      box-sizing: border-box;
+    }
+    .about-card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 28px;
+      margin-top: 36px;
+    }
+    .about-card {
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1.5px solid rgba(29, 78, 216, 0.20);
+      border-radius: 20px;
+      padding: 32px 28px;
+      box-shadow: 0 10px 30px rgba(15, 45, 85, 0.08);
+      transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+    }
+    .about-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 16px 40px rgba(29, 78, 216, 0.16);
+      border-color: #2563EB;
+      background: #FFFFFF;
+    }
+    .about-card h3 {
+      font-family: var(--font-display);
+      font-size: 24px;
+      color: #0F2D55;
+      margin: 0 0 12px;
+    }
+    .about-card p {
+      color: #1F2937;
+      font-size: 14.5px;
+      line-height: 1.65;
+      font-weight: 500;
+    }
+    .pillar-pill {
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 99px;
+      font-size: 11.5px;
+      font-weight: 700;
+      background: #DBEAFE;
+      color: #1D4ED8;
+      margin-bottom: 14px;
+    }
+  </style>
+</head>
+<body data-active-view="about">
+
+  <!-- Sticky Navbar -->
+  <nav id="navbar" style="background: linear-gradient(120deg, #EFF6FF 0%, #BFDBFE 18%, #1D4ED8 35%, #FAF8F5 50%, #1D4ED8 65%, #BFDBFE 82%, #EFF6FF 100%) !important; border-bottom: 2px solid rgba(29, 78, 216, 0.35) !important;">
+    <a class="lg" href="/" id="brand-link">
+      <img id="lgi" alt="OD AI HUB Logo" width="42" height="42" src="/website/images/od_ai_hub_logo_circle.png" />
+      <span>OD AI HUB<small>Learn • Build • Innovate • Scale</small></span>
+    </a>
+
+    <div class="lk" id="nav-links">
+      <a href="/" id="nav-home">Home</a>
+      <a href="/#/academy" id="nav-academy">Academy</a>
+      <a href="/#/technologies" id="nav-tech">Technologies</a>
+      <a href="/#/innovation-lab" id="nav-inno">Innovation Lab</a>
+      <a href="/#/startups" id="nav-startups">Startups</a>
+      <a href="/#/for-business" id="nav-business">For Business</a>
+      <a href="/about" class="on" id="nav-about">About</a>
+      <a href="/#/blog" id="nav-blog">Blog</a>
+    </div>
+
+    <div class="nav-actions">
+      <button class="btn nav-enq-btn" onclick="openEnquiryModal('General About Enquiry')" id="nav-enquire-btn">Enquire Now</button>
+      <button class="menu-toggle" id="menu-toggle" aria-label="Toggle navigation menu" type="button">
+        <svg class="icon-hamburger" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <line x1="3" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+      </button>
+    </div>
+  </nav>
+
+  <!-- About Hero Banner -->
+  <header class="about-hero">
+    <div class="about-hero-container">
+      <span class="about-hero-tagline">ABOUT OD AI HUB • ROOTS &amp; VISION</span>
+      <h1>A stronger Odisha built on<br><em>talent, technology &amp; ambition</em></h1>
+      <p>Building the state's most comprehensive talent-to-innovation ecosystem from Berhampur, Ganjam to a global stage — unlocking opportunities for students, founders, researchers, and enterprises.</p>
+      <div style="display:flex; gap:14px; flex-wrap:wrap;">
+        <a class="btn" style="background:#F59E0B !important; color:#0F1D4A !important; font-weight:700 !important; border:none !important;" href="#mission">Our Mission &amp; Story ↓</a>
+        <button class="btn o" style="border:1.5px solid rgba(255,255,255,0.6) !important; color:#FFFFFF !important; background:rgba(255,255,255,0.1) !important;" onclick="openEnquiryModal('Leadership Connect')">Connect with Leadership →</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- About Content Sections -->
+  <main class="about-content-body">
+    <!-- Mission & Story -->
+    <section class="about-card" id="mission">
+      <span class="pillar-pill">OUR MISSION &amp; VISION</span>
+      <h3>Empowering Odisha Through Artificial Intelligence</h3>
+      <p style="font-size:16px; line-height:1.75; margin-bottom:16px;">
+        OD AI HUB is an end-to-end AI talent-to-innovation platform empowering students, professionals, institutions, and businesses to <strong>Learn, Build, Innovate, and Scale</strong>. We believe that talent in Tier-2 and Tier-3 cities in Odisha holds tremendous potential that, with the right industry alignment and mentorship, can compete globally.
+      </p>
+      <p style="font-size:15px; line-height:1.7; color:#374151;">
+        Rooted in Berhampur, the cultural and educational capital of Southern Odisha, we are bridging the gap between classroom theory and real-world deployment. From school children exploring their first line of Python in Class 5, to college graduates building neural networks, to local enterprises automating workflows with custom LLMs — OD AI HUB is the catalyst for technological empowerment.
+      </p>
+    </section>
+
+    <!-- 4 Pillars Grid -->
+    <div class="about-card-grid">
+      <div class="about-card">
+        <span class="pillar-pill">01 • ACADEMY</span>
+        <h3>OD AI Academy</h3>
+        <p>Curricula aligned with global tech leaders. 6 specialized learning paths spanning school students, diploma holders, college graduates, and working professionals with 100% hands-on project work.</p>
+      </div>
+
+      <div class="about-card">
+        <span class="pillar-pill">02 • TECHNOLOGIES</span>
+        <h3>OD AI Technologies</h3>
+        <p>Enterprise AI engineering, custom process automation, cloud DevOps, and IT architecture advisory that helps businesses scale their bottom line with intelligence.</p>
+      </div>
+
+      <div class="about-card">
+        <span class="pillar-pill">03 • INNOVATION LAB</span>
+        <h3>OD AI Innovation Lab</h3>
+        <p>Rapid prototyping facilities in Berhampur for AgriTech soil telemetry, IoT sensor networks, clinical health diagnostics, and civic robotics built by local talent.</p>
+      </div>
+
+      <div class="about-card">
+        <span class="pillar-pill">04 • STARTUP INCUBATOR</span>
+        <h3>OD AI Startups</h3>
+        <p>From idea to venture capital. Pre-seed incubation, mentorship, compute grants, and institutional funding access for founders solving regional and national challenges.</p>
+      </div>
+    </div>
+
+    <!-- Verification & Headquarters Section -->
+    <div class="about-card-grid" style="margin-top:28px;">
+      <div class="about-card">
+        <span class="pillar-pill">HEADQUARTERS</span>
+        <h3>Berhampur, Ganjam, Odisha</h3>
+        <p style="margin-bottom:12px;"><strong>Address:</strong><br>OD AI HUB Headquarters, Berhampur, Ganjam, Odisha, India - 760001</p>
+        <p style="margin-bottom:12px;"><strong>Email:</strong> <a href="mailto:info@odaihub.in" style="color:#1D4ED8; font-weight:700;">info@odaihub.in</a></p>
+        <p><strong>Campus Hours:</strong> Monday – Saturday, 9:00 AM – 7:00 PM IST</p>
+      </div>
+
+      <div class="about-card">
+        <span class="pillar-pill">GOVERNANCE &amp; CREDENTIALS</span>
+        <h3>Certificate Verification</h3>
+        <p style="margin-bottom:16px;">All certificates issued by OD AI Academy and OD AI HUB contain verifiable cryptographic hashes that employers, universities, and partners can validate instantaneously online.</p>
+        <button class="btn" style="background:#1D4ED8 !important; color:#FFFFFF !important; border:none !important;" onclick="openEnquiryModal('Certificate Verification')">Verify a Certificate →</button>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer style="background:#0F172A; color:#FAF7F2; padding:48px clamp(20px, 4vw, 40px) 24px; margin-top:auto;">
+    <div style="max-width:1240px; margin:0 auto; display:flex; flex-wrap:wrap; justify-content:space-between; gap:32px; border-bottom:1px solid rgba(255,255,255,0.12); padding-bottom:32px;">
+      <div>
+        <h4 style="color:#FFFFFF; font-size:20px; margin:0 0 8px;">OD AI HUB</h4>
+        <p style="color:#94A3B8; font-size:13.5px; max-width:32ch; line-height:1.6; margin:0;">A stronger Odisha through AI. Empowering learners, innovators, and enterprises from Berhampur to the world.</p>
+      </div>
+      <div>
+        <h5 style="color:#FDE68A; font-size:14px; text-transform:uppercase; margin:0 0 12px;">Ecosystem</h5>
+        <div style="display:flex; flex-direction:column; gap:8px; font-size:13.5px;">
+          <a href="/#/academy" style="color:#CBD5E1; text-decoration:none;">OD AI Academy</a>
+          <a href="/#/technologies" style="color:#CBD5E1; text-decoration:none;">OD AI Technologies</a>
+          <a href="/#/innovation-lab" style="color:#CBD5E1; text-decoration:none;">Innovation Lab</a>
+          <a href="/#/startups" style="color:#CBD5E1; text-decoration:none;">Startup Ecosystem</a>
+        </div>
+      </div>
+      <div>
+        <h5 style="color:#FDE68A; font-size:14px; text-transform:uppercase; margin:0 0 12px;">Quick Links</h5>
+        <div style="display:flex; flex-direction:column; gap:8px; font-size:13.5px;">
+          <a href="/about" style="color:#CBD5E1; text-decoration:none;">About OD AI HUB</a>
+          <a href="/#/events" style="color:#CBD5E1; text-decoration:none;">Events &amp; Hackathons</a>
+          <a href="/#/success-stories" style="color:#CBD5E1; text-decoration:none;">Success Stories</a>
+          <a href="/#/blog" style="color:#CBD5E1; text-decoration:none;">Blog &amp; Articles</a>
+        </div>
+      </div>
+    </div>
+    <div style="max-width:1240px; margin:20px auto 0; display:flex; justify-content:space-between; font-size:12px; color:#64748B;">
+      <span>© 2026 OD AI HUB. All rights reserved.</span>
+      <span>Berhampur, Odisha, India</span>
+    </div>
+  </footer>
+
+  <!-- Modal Container for Enquiries -->
+  <div id="md" class="modal-backdrop" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.6); z-index:9999; backdrop-filter:blur(6px); place-items:center;">
+    <div style="background:#fff; border-radius:20px; padding:32px; max-width:480px; width:90%; position:relative;">
+      <button style="position:absolute; top:16px; right:16px; border:none; background:none; font-size:22px; cursor:pointer;" onclick="document.getElementById('md').style.display='none'">×</button>
+      <h3 id="modal-title" style="margin:0 0 16px; font-family:var(--font-display); font-size:24px; color:#0F2D55;">Connect with OD AI HUB</h3>
+      <p style="color:#4B5563; font-size:14px; margin-bottom:20px;">Leave your contact details and our team will get in touch with you.</p>
+      <form onsubmit="event.preventDefault(); alert('Thank you! Our team will connect with you shortly.'); document.getElementById('md').style.display='none';">
+        <input required type="text" placeholder="Full Name" style="width:100%; padding:10px 14px; border-radius:10px; border:1px solid #CBD5E1; margin-bottom:12px; box-sizing:border-box;" />
+        <input required type="email" placeholder="Email Address" style="width:100%; padding:10px 14px; border-radius:10px; border:1px solid #CBD5E1; margin-bottom:12px; box-sizing:border-box;" />
+        <input required type="tel" placeholder="Phone Number" style="width:100%; padding:10px 14px; border-radius:10px; border:1px solid #CBD5E1; margin-bottom:12px; box-sizing:border-box;" />
+        <textarea rows="3" placeholder="How can we help you?" style="width:100%; padding:10px 14px; border-radius:10px; border:1px solid #CBD5E1; margin-bottom:16px; box-sizing:border-box;"></textarea>
+        <button type="submit" class="btn" style="width:100%; background:#1D4ED8 !important; color:#fff !important; justify-content:center; padding:12px; border-radius:10px; font-weight:700;">Submit Enquiry →</button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    function openEnquiryModal(topic) {
+      document.getElementById('modal-title').textContent = topic || 'Connect with OD AI HUB';
+      document.getElementById('md').style.display = 'grid';
+    }
+  </script>
+</body>
+</html>

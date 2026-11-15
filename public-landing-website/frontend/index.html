@@ -10,6 +10,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/website/css/style.css?v=2026_mixed_nav_v2">
 <script src="/website/js/assets.js"></script>
+<script src="/website/js/customization-sync.js"></script>
 <style>
 /* Index-page only overrides */
 .view[hidden]{display:none}
@@ -24,7 +25,7 @@
 .back-btn{display:inline-flex;align-items:center;gap:6px;padding:7px 16px;border-radius:99px;border:1.5px solid var(--beige-dark);background:rgba(255,255,255,.60);font:600 12.5px var(--font-sans);cursor:pointer;color:var(--charcoal);margin-bottom:14px;transition:all .22s;backdrop-filter:blur(8px)}
 .back-btn:hover{background:var(--charcoal);color:#fff;border-color:var(--charcoal)}
 
-/* ─── Modern Professional Blue Navbar (Single Clean Row) ─── */
+/* ─── Structural Navbar Layout (Colors controlled dynamically by page-themes.css) ─── */
 nav, #navbar {
   position: fixed !important;
   top: 0 !important;
@@ -32,10 +33,8 @@ nav, #navbar {
   right: 0 !important;
   height: 64px !important;
   z-index: 99 !important;
-  background: linear-gradient(120deg, #FFFFFF 0%, #B8D9F8 12%, #2563EB 28%, #EAF4FF 44%, #1A4FA0 58%, #A8D0F5 72%, #FFFFFF 85%, #3B82C4 100%) !important;
-  backdrop-filter: blur(16px) !important;
-  -webkit-backdrop-filter: blur(16px) !important;
-  border-bottom: 1.5px solid rgba(22, 59, 107, 0.30) !important;
+  backdrop-filter: blur(20px) !important;
+  -webkit-backdrop-filter: blur(20px) !important;
   display: flex !important;
   flex-direction: row !important;
   flex-wrap: nowrap !important;
@@ -43,7 +42,6 @@ nav, #navbar {
   justify-content: space-between !important;
   gap: 16px !important;
   padding: 0 clamp(16px, 3.5vw, 40px) !important;
-  box-shadow: 0 4px 24px rgba(22, 59, 107, 0.35) !important;
   box-sizing: border-box !important;
 }
 
@@ -53,7 +51,6 @@ nav, #navbar {
   gap: 10px !important;
   font: 700 18px var(--font-display, "Cormorant Garamond", Georgia, serif) !important;
   letter-spacing: .01em !important;
-  color: #0F2D55 !important;
   flex-shrink: 0 !important;
   text-decoration: none !important;
 }
@@ -68,7 +65,7 @@ nav, #navbar {
 .lg small, .lg-sub {
   display: block !important;
   font: 400 10px var(--font-sans, "Inter", sans-serif) !important;
-  color: rgba(15, 45, 85, 0.75) !important;
+  opacity: 0.8 !important;
   letter-spacing: .04em !important;
   text-transform: uppercase !important;
 }
@@ -83,22 +80,11 @@ nav, #navbar {
 }
 .lk a {
   font: 500 13px var(--font-sans, "Inter", sans-serif) !important;
-  color: #0F2D55 !important;
   padding: 6px 10px !important;
   border-radius: 6px !important;
   text-decoration: none !important;
   white-space: nowrap !important;
   transition: color .2s, background .2s !important;
-}
-.lk a:hover {
-  color: #163B6B !important;
-  background: rgba(22, 59, 107, 0.12) !important;
-}
-.lk a.on {
-  color: #163B6B !important;
-  background: rgba(22, 59, 107, 0.18) !important;
-  font-weight: 600 !important;
-  box-shadow: inset 0 -2px 0 0 #163B6B !important;
 }
 
 .nav-actions {
@@ -110,33 +96,29 @@ nav, #navbar {
   flex-shrink: 0 !important;
 }
 .nav-enq-btn, nav .nav-enq-btn {
-  background: #D6B66F !important;
-  color: #0D0D0D !important;
   font: 600 13px var(--font-sans, "Inter", sans-serif) !important;
   padding: 8px 18px !important;
   border-radius: 99px !important;
-  border: 1px solid #D6B66F !important;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.20) !important;
   cursor: pointer !important;
   white-space: nowrap !important;
   text-decoration: none !important;
   display: inline-block !important;
+  transition: transform .2s ease, box-shadow .2s ease, background .2s ease !important;
 }
 .nav-enq-btn:hover, nav .nav-enq-btn:hover {
-  background: #E2C988 !important;
-  border-color: #E2C988 !important;
   transform: translateY(-1px) !important;
 }
 .menu-toggle, .menu-btn {
   display: none !important;
   background: transparent !important;
-  border: 1px solid rgba(22, 59, 107, 0.35) !important;
+  border: 1.5px solid currentColor !important;
   border-radius: 8px !important;
-  color: #163B6B !important;
   cursor: pointer !important;
   padding: 6px !important;
   align-items: center !important;
   justify-content: center !important;
+  transition: all 0.2s ease !important;
+}
   transition: all 0.2s ease !important;
 }
 .menu-toggle:hover, .menu-btn:hover {
@@ -351,12 +333,13 @@ nav, #navbar {
 }
 
 </style>
+<link rel="stylesheet" href="/website/css/page-themes.css?v=2026_themes_v9">
 </head>
 <body>
 
 <!-- Header Navigation -->
 <nav>
-  <a class="lg" href="#/"><img id="lgi" alt="OD AI HUB Logo" width="40" height="40"><span>OD AI HUB<small class="lg-sub">Learn • Build • Innovate • Scale</small></span></a>
+  <a class="lg" href="#/"><img id="lgi" src="/website/images/od_ai_hub_logo_circle.png" alt="OD AI HUB Logo" width="44" height="44"><span>OD AI HUB<small class="lg-sub">Learn • Build • Innovate • Scale</small></span></a>
   <div class="lk" id="main-nav-links">
     <a data-r="home" href="#/">Home</a>
     <a data-r="academy" href="#/academy">Academy</a>
@@ -367,7 +350,7 @@ nav, #navbar {
     <a data-r="for-institutions" href="#/for-institutions">For Institutions</a>
     <a data-r="events" href="#/events">Events</a>
     <a data-r="success-stories" href="#/success-stories">Success Stories</a>
-    <a data-r="about" href="#/about">About</a>
+    <a data-r="about" href="/about">About</a>
     <a data-r="blog" href="#/blog">Blog</a>
   </div>
   <div class="nav-actions">
@@ -388,7 +371,7 @@ nav, #navbar {
 
 <!-- ==================== VIEW 1: HOME ==================== -->
 <div class="view" id="view-home">
-  <header class="global-hero" data-hero="home" id="top" style="background-image: url('/website/images/Home.png');">
+  <header class="global-hero" data-hero="home" id="top">
     <div class="global-hero-inner">
       <div class="global-hero-content">
         <div class="global-hero-tagline">OD AI HUB • A Stronger Odisha Through AI</div>
@@ -472,14 +455,14 @@ nav, #navbar {
     </section>
 
     <!-- About & Berhampur Section -->
-    <section class="sec" id="about">
+    <section class="sec" id="home-about">
       <div class="two">
         <div class="pnl story-pnl">
           <div>
             <h2>Creating AI opportunities from <span>Berhampur to beyond</span></h2>
             <p>We are on a mission to make Odisha a hub for AI talent, innovation and real-world impact by empowering individuals, institutions and businesses.</p>
           </div>
-          <a class="btn" href="#/about" style="margin-top:20px; align-self:flex-start;">Our story →</a>
+          <a class="btn" href="/about" style="margin-top:20px; align-self:flex-start;">Our story →</a>
         </div>
         <div class="pnl">
           <h2 style="font-size:26px">Why OD AI HUB?</h2>
@@ -514,7 +497,7 @@ nav, #navbar {
 
 <!-- ==================== VIEW 2: ACADEMY (SEPARATE WITH 3D RING & CATALOG) ==================== -->
 <div class="view" id="view-academy" hidden>
-  <header class="global-hero" data-hero="academy" id="atop" style="background-image: url('/website/images/Academy%20page%20image.png'); background-position: 72% center;">
+  <header class="global-hero" data-hero="academy" id="atop">
     <div class="global-hero-inner">
       <div class="global-hero-content">
         <div class="global-hero-tagline">OD AI ACADEMY • LEARN TODAY. LEAD TOMORROW.</div>
@@ -626,7 +609,7 @@ nav, #navbar {
 
 <!-- ==================== VIEW 3: TECHNOLOGIES ==================== -->
 <div class="view" id="view-technologies" hidden>
-  <header class="global-hero" data-hero="technologies" style="background-image: url('/website/images/technologies.jpg'); background-size: cover; background-position: center;">
+  <header class="global-hero" data-hero="technologies">
     <div class="global-hero-inner">
       <div class="global-hero-content">
         <div class="global-hero-tagline">OD AI TECHNOLOGIES • ENTERPRISE &amp; AUTOMATION</div>
@@ -653,7 +636,7 @@ nav, #navbar {
 
 <!-- ==================== VIEW 4: INNOVATION LAB ==================== -->
 <div class="view" id="view-innovation-lab" hidden>
-  <header class="global-hero" data-hero="innovation-lab" style="background-image: url('/website/images/Innovation.png');">
+  <header class="global-hero" data-hero="innovation-lab">
     <div class="global-hero-inner">
       <div class="global-hero-content">
         <div class="global-hero-tagline">OD AI INNOVATION LAB • PROTOTYPING &amp; R&amp;D</div>
@@ -680,7 +663,7 @@ nav, #navbar {
 
 <!-- ==================== VIEW 5: STARTUPS ==================== -->
 <div class="view" id="view-startups" hidden>
-  <header class="global-hero" data-hero="startups" style="background-image: url('/website/images/Strtups.png');">
+  <header class="global-hero" data-hero="startups">
     <div class="global-hero-inner">
       <div class="global-hero-content">
         <div class="global-hero-tagline">OD AI STARTUP ECOSYSTEM • SEED TO SCALE</div>
@@ -707,7 +690,7 @@ nav, #navbar {
 
 <!-- ==================== VIEW 6: FOR BUSINESS ==================== -->
 <div class="view" id="view-for-business" hidden>
-  <header class="global-hero" data-hero="for-business" style="background-image: url('/website/images/Business.png');">
+  <header class="global-hero" data-hero="for-business">
     <div class="global-hero-inner">
       <div class="global-hero-content">
         <div class="global-hero-tagline">FOR BUSINESS • ENTERPRISE TRANSFORMATION</div>
@@ -734,7 +717,7 @@ nav, #navbar {
 
 <!-- ==================== VIEW 7: FOR INSTITUTIONS ==================== -->
 <div class="view" id="view-for-institutions" hidden>
-  <header class="global-hero" data-hero="for-institutions" style="background-image: url('/website/images/Institutions.png');">
+  <header class="global-hero" data-hero="for-institutions">
     <div class="global-hero-inner">
       <div class="global-hero-content">
         <div class="global-hero-tagline">FOR INSTITUTIONS • ACADEMIC EXCELLENCE</div>
@@ -764,7 +747,7 @@ nav, #navbar {
 
 <!-- ==================== VIEW 8: EVENTS ==================== -->
 <div class="view" id="view-events" hidden>
-  <header class="global-hero" data-hero="events" style="background-image: url('/website/images/Events.png');">
+  <header class="global-hero" data-hero="events">
     <div class="global-hero-inner">
       <div class="global-hero-content">
         <div class="global-hero-tagline">EVENTS &amp; WORKSHOPS • CONNECT &amp; COLLABORATE</div>
@@ -787,7 +770,7 @@ nav, #navbar {
 
 <!-- ==================== VIEW 9: SUCCESS STORIES ==================== -->
 <div class="view" id="view-success-stories" hidden>
-  <header class="global-hero" data-hero="success-stories" style="background-image: url('/website/images/Success-Stories.png');">
+  <header class="global-hero" data-hero="success-stories">
     <div class="global-hero-inner">
       <div class="global-hero-content">
         <div class="global-hero-tagline">REAL PEOPLE • REAL IMPACT</div>
@@ -810,7 +793,7 @@ nav, #navbar {
 
 <!-- ==================== VIEW 10: ABOUT & OTHER ==================== -->
 <div class="view" id="view-about" hidden>
-  <header class="global-hero" data-hero="about" style="background-image: url('/website/images/About.png');">
+  <header class="global-hero" data-hero="about">
     <div class="global-hero-inner">
       <div class="global-hero-content">
         <div class="global-hero-tagline">ABOUT OD AI HUB • ROOTS &amp; VISION</div>
@@ -846,7 +829,7 @@ nav, #navbar {
 
 <!-- ==================== VIEW: BLOG ==================== -->
 <div class="view" id="view-blog" hidden>
-  <header class="global-hero" data-hero="blog" style="background-image: url('/website/images/Blog.png');">
+  <header class="global-hero" data-hero="blog">
     <div class="global-hero-inner">
       <div class="global-hero-content">
         <div class="global-hero-tagline">OD AI HUB INSIGHTS • PERSPECTIVES &amp; ARTICLES</div>
@@ -907,7 +890,7 @@ nav, #navbar {
       <h4>Community &amp; Support</h4>
       <a href="#/events">Events &amp; Hackathons</a>
       <a href="#/success-stories">Success Stories</a>
-      <a href="#/about">About OD AI HUB</a>
+      <a href="/about">About OD AI HUB</a>
       <a href="#about" data-enq="Certificate Verification">Certificate Verification</a>
       <a href="mailto:info@odaihub.in">Contact Support</a>
       <a href="#/blog">Blog &amp; Articles</a>
@@ -1051,6 +1034,60 @@ const CARD_THEMES = [
   }
 ];
 
+// Specific themes for the 5 Home Page Rings (matching their respective page palettes)
+const HOME_RING_THEMES = [
+  // 0: OD AI Academy -> Light blue with quicksand & swan wing
+  {
+    bg: 'linear-gradient(160deg, #FFFFFF 0%, #EFF6FF 40%, #F4F0E8 75%, #D7EBFF 100%)',
+    border: 'rgba(96, 165, 250, 0.85)',
+    badgeBg: 'rgba(219, 234, 254, 0.95)',
+    badgeColor: '#1D4ED8',
+    btnBg: 'linear-gradient(135deg, #1D4ED8 0%, #1e40af 100%)',
+    btnColor: '#FFFFFF',
+    glow: 'rgba(29, 78, 216, 0.40)'
+  },
+  // 1: OD AI Technologies -> AI Minimal: Ice Blue (#F0FDF4), Deep Emerald (#064E3B), Mint Green (#10B981)
+  {
+    bg: 'linear-gradient(160deg, #F0FDF4 0%, #DCFCE7 40%, #A7F3D0 75%, #6EE7B7 100%)',
+    border: 'rgba(16, 185, 129, 0.85)',
+    badgeBg: 'rgba(209, 250, 229, 0.95)',
+    badgeColor: '#064E3B',
+    btnBg: 'linear-gradient(135deg, #10B981 0%, #064E3B 100%)',
+    btnColor: '#FFFFFF',
+    glow: 'rgba(16, 185, 129, 0.45)'
+  },
+  // 2: OD AI Innovation Lab -> Neo-Brutalist: Soft Gray (#E5E7EB), Ink Black (#000000), Laser Yellow (#FACC15)
+  {
+    bg: 'linear-gradient(160deg, #FFFFFF 0%, #F3F4F6 40%, #E5E7EB 75%, #FEF08A 100%)',
+    border: 'rgba(0, 0, 0, 0.90)',
+    badgeBg: '#FACC15',
+    badgeColor: '#000000',
+    btnBg: 'linear-gradient(135deg, #FACC15 0%, #ca8a04 100%)',
+    btnColor: '#000000',
+    glow: 'rgba(250, 204, 21, 0.50)'
+  },
+  // 3: OD AI Startup Ecosystem -> Growth Focused: Alabaster (#FBFBFB), Midnight Blue (#1E3A8A), Solar Gold (#EAB308)
+  {
+    bg: 'linear-gradient(160deg, #FBFBFB 0%, #EFF6FF 40%, #BFDBFE 75%, #FEF08A 100%)',
+    border: 'rgba(30, 58, 138, 0.85)',
+    badgeBg: 'rgba(219, 234, 254, 0.95)',
+    badgeColor: '#1E3A8A',
+    btnBg: 'linear-gradient(135deg, #EAB308 0%, #1E3A8A 100%)',
+    btnColor: '#FFFFFF',
+    glow: 'rgba(234, 179, 8, 0.45)'
+  },
+  // 4: For Business -> Premium Executive: Pearl Mist (#F9FAFB), Rich Obsidian (#111827), Crimson Red (#DC2626)
+  {
+    bg: 'linear-gradient(160deg, #F9FAFB 0%, #F3F4F6 40%, #E5E7EB 75%, #FEE2E2 100%)',
+    border: 'rgba(220, 38, 38, 0.85)',
+    badgeBg: 'rgba(254, 226, 226, 0.95)',
+    badgeColor: '#991b1b',
+    btnBg: 'linear-gradient(135deg, #DC2626 0%, #111827 100%)',
+    btnColor: '#FFFFFF',
+    glow: 'rgba(220, 38, 38, 0.45)'
+  }
+];
+
 // ==================== 1. 3D RING FOR FIVE BUSINESSES (HOME) ====================
 const P = [
   { n: 'OD AI Academy', t: 'Learn today. Lead tomorrow.', c: '#A65A3A', i: 'A', slug: 'academy', b: ['School programs (Class 5–10)', 'College programs (B.Tech, BCA, B.Sc, MCA)', 'Non-tech programs for BA, BCom, MBA', 'Internships and industry projects', 'Career & placement assistance'] },
@@ -1063,7 +1100,7 @@ const P = [
 (() => {
   const st = $('stage3d'), lbl = $('rl'), STEP = Math.PI * 2 / 5;
   st.innerHTML = P.map((p, i) => {
-    const tm = CARD_THEMES[i % CARD_THEMES.length];
+    const tm = HOME_RING_THEMES[i % HOME_RING_THEMES.length];
     return `
     <article class="rc" data-i="${i}" style="background:${tm.bg} !important; border:1.5px solid ${tm.border} !important; --rc-glow:${tm.glow};">
       <div class="top">
@@ -1073,7 +1110,7 @@ const P = [
         <h3>${p.n}</h3>
         <em>${p.t}</em>
         <ul>${p.b.map(x => `<li>${x}</li>`).join('')}</ul>
-        <a class="btn cat-explore-btn" style="background:${tm.btnBg} !important; color:#FFFFFF !important; border:none !important; box-shadow:0 4px 14px ${tm.glow} !important;" href="#/${p.slug}">Explore ${p.n.replace('OD AI ', '')} →</a>
+        <a class="btn cat-explore-btn" style="background:${tm.btnBg} !important; color:${tm.btnColor || '#FFFFFF'} !important; border:none !important; box-shadow:0 4px 14px ${tm.glow} !important;" href="#/${p.slug}">Explore ${p.n.replace('OD AI ', '')} →</a>
       </div>
     </article>
   `; }).join('');
@@ -1482,12 +1519,15 @@ function renderEvents(eventsList) {
     const desc = e.description || e.d || '';
     const loc = e.location || e.loc || (e.mode ? e.mode.toUpperCase() : 'OD AI HUB Campus');
     return `
-      <article class="feature-card">
-        <div class="badge-list"><span class="badge-event-type">${type}</span><span class="badge-event-date">${dateStr || 'Upcoming'}</span></div>
-        <h3>${title}</h3>
-        <p>${desc}</p>
-        <p class="event-location">📍 ${loc}</p>
-        <button class="btn" data-enq="Register for ${title}">Register for Free →</button>
+      <article class="feature-card" style="background:linear-gradient(165deg, #FFFFFF 0%, #FAF5FF 45%, #EEF2FF 100%) !important; border:1.5px solid rgba(99,102,241,0.35) !important; box-shadow:0 10px 28px rgba(0,0,0,0.08) !important;">
+        <div class="badge-list" style="display:flex !important; gap:6px !important; margin-bottom:12px !important;">
+          <span class="badge-event-type" style="background:rgba(99,102,241,0.14) !important; color:#4338CA !important; border:1px solid rgba(99,102,241,0.35) !important; font-weight:700 !important; font-size:11.5px !important; padding:4px 10px !important; border-radius:99px !important;">${type}</span>
+          <span class="badge-event-date" style="background:rgba(0,0,0,0.06) !important; color:#1F2937 !important; border:1px solid rgba(0,0,0,0.15) !important; font-weight:600 !important; font-size:11.5px !important; padding:4px 10px !important; border-radius:99px !important;">${dateStr || 'Upcoming'}</span>
+        </div>
+        <h3 style="color:#111827 !important; font-weight:700 !important; font-size:20px !important; line-height:1.25 !important; margin:0 0 10px !important;">${title}</h3>
+        <p style="color:#374151 !important; font-size:13.5px !important; line-height:1.6 !important; font-weight:500 !important; margin:0 0 12px !important; flex:1 1 auto !important;">${desc}</p>
+        <p class="event-location" style="color:#4B5563 !important; font-size:12.5px !important; font-weight:600 !important; margin:auto 0 16px !important;">📍 ${loc}</p>
+        <button class="btn" style="background:linear-gradient(135deg, #6366F1 0%, #4F46E5 100%) !important; color:#FFFFFF !important; font-weight:600 !important; border:none !important; box-shadow:0 4px 14px rgba(99,102,241,0.40) !important; border-radius:10px !important; padding:9px 18px !important; cursor:pointer !important;" data-enq="Register for ${title}">Register for Free →</button>
       </article>
     `;
   }).join('');
@@ -1512,11 +1552,14 @@ function renderSuccessStories(storiesList) {
     const tag = s.outcome || s.category || s.stream || 'Verified Impact';
     const quote = s.quote || s.d || '';
     return `
-      <article class="feature-card">
-        <h3>${name}</h3>
-        <div class="badge-list"><span class="badge-story-role">${role}</span><span class="badge-story-tag">${tag}</span></div>
-        <p class="story-quote">${quote.startsWith('“') ? quote : `“${quote}”`}</p>
-        <span class="st">★★★★★</span>
+      <article class="feature-card" style="background:linear-gradient(165deg, #FFFFFF 0%, #FAF5FF 45%, #FCE7F3 100%) !important; border:1.5px solid rgba(236,72,153,0.45) !important; box-shadow:0 10px 28px rgba(88,28,135,0.12) !important;">
+        <h3 style="color:#581C87 !important; font-weight:700 !important; font-size:20px !important; line-height:1.25 !important; margin:0 0 10px !important;">${name}</h3>
+        <div class="badge-list" style="display:flex !important; gap:6px !important; margin-bottom:14px !important;">
+          <span class="badge-story-role" style="background:rgba(88,28,135,0.14) !important; color:#581C87 !important; border:1px solid rgba(88,28,135,0.35) !important; font-weight:700 !important; font-size:11.5px !important; padding:4px 10px !important; border-radius:99px !important;">${role}</span>
+          <span class="badge-story-tag" style="background:rgba(236,72,153,0.15) !important; color:#BE185D !important; border:1px solid rgba(236,72,153,0.40) !important; font-weight:700 !important; font-size:11.5px !important; padding:4px 10px !important; border-radius:99px !important;">${tag}</span>
+        </div>
+        <p class="story-quote" style="color:#111827 !important; font-size:14px !important; line-height:1.68 !important; font-weight:600 !important; font-style:italic !important; opacity:1 !important; margin:0 0 16px !important; flex:1 1 auto !important;">${quote.startsWith('“') ? quote : `“${quote}”`}</p>
+        <span class="st" style="color:#F59E0B !important; font-size:15px !important; letter-spacing:3px !important; font-weight:800 !important; display:block !important; padding-top:10px !important; border-top:1px solid rgba(88,28,135,0.15) !important; margin-top:auto !important;">★★★★★</span>
       </article>
     `;
   }).join('');
@@ -1767,18 +1810,238 @@ if (location.search.includes('audit=cards')) {
 }
 const VIEWS = ['home', 'academy', 'technologies', 'innovation-lab', 'startups', 'for-business', 'for-institutions', 'events', 'success-stories', 'about', 'blog'];
 
+const PAGE_NAV_THEMES = {
+  home: {
+    navBg: 'linear-gradient(120deg, #FFFFFF 0%, #BFDBFE 18%, #1D4ED8 35%, #EFF6FF 50%, #1D4ED8 65%, #BFDBFE 82%, #FFFFFF 100%)',
+    border: 'rgba(29, 78, 216, 0.35)',
+    boxShadow: '0 4px 24px rgba(29, 78, 216, 0.25)',
+    linkColor: '#0F2D55',
+    btnBg: '#F59E0B',
+    btnColor: '#111827',
+    btnBorder: '#F59E0B',
+    pageBg: 'linear-gradient(180deg, #FFFFFF 0%, #EFF6FF 25%, #DBEAFE 55%, #EFF6FF 85%, #FFFFFF 100%)'
+  },
+  academy: {
+    navBg: 'linear-gradient(120deg, #EFF6FF 0%, #FAF8F5 20%, #D6B66F 35%, #EFF6FF 50%, #D6B66F 65%, #FAF8F5 80%, #EFF6FF 100%)',
+    border: 'rgba(214, 182, 111, 0.45)',
+    boxShadow: '0 4px 24px rgba(214, 182, 111, 0.25)',
+    linkColor: '#1E3A8A',
+    btnBg: 'linear-gradient(135deg, #D6B66F 0%, #B88E3E 100%)',
+    btnColor: '#111827',
+    btnBorder: '#D6B66F',
+    pageBg: 'linear-gradient(180deg, #EFF6FF 0%, #FAF8F5 30%, #F5EFE0 65%, #EFF6FF 100%)'
+  },
+  technologies: {
+    navBg: 'linear-gradient(120deg, #F0FDF4 0%, #A7F3D0 18%, #064E3B 35%, #ECFDF5 50%, #064E3B 65%, #A7F3D0 82%, #F0FDF4 100%)',
+    border: 'rgba(6, 78, 59, 0.45)',
+    boxShadow: '0 4px 24px rgba(6, 78, 59, 0.25)',
+    linkColor: '#064E3B',
+    btnBg: '#10B981',
+    btnColor: '#022c22',
+    btnBorder: '#10B981',
+    pageBg: 'linear-gradient(180deg, #F0FDF4 0%, #DCFCE7 30%, #E6FBF0 65%, #D1FAE5 100%)'
+  },
+  'innovation-lab': {
+    navBg: 'linear-gradient(120deg, #E5E7EB 0%, #D1D5DB 20%, #111827 35%, #F3F4F6 50%, #111827 65%, #D1D5DB 80%, #E5E7EB 100%)',
+    border: 'rgba(0, 0, 0, 0.65)',
+    boxShadow: '0 4px 24px rgba(0, 0, 0, 0.35)',
+    linkColor: '#111827',
+    btnBg: '#FACC15',
+    btnColor: '#000000',
+    btnBorder: '#000000',
+    pageBg: 'linear-gradient(180deg, #E5E7EB 0%, #D1D5DB 30%, #E5E7EB 65%, #FEF08A 95%)'
+  },
+  startups: {
+    navBg: 'linear-gradient(120deg, #FBFBFB 0%, #BFDBFE 18%, #1E3A8A 35%, #EFF6FF 50%, #1E3A8A 65%, #BFDBFE 82%, #FBFBFB 100%)',
+    border: 'rgba(30, 58, 138, 0.45)',
+    boxShadow: '0 4px 24px rgba(30, 58, 138, 0.25)',
+    linkColor: '#1E3A8A',
+    btnBg: '#EAB308',
+    btnColor: '#0F172A',
+    btnBorder: '#EAB308',
+    pageBg: 'linear-gradient(180deg, #F8FAFC 0%, #EFF6FF 30%, #FEF9C3 70%, #F0F4FA 100%)'
+  },
+  'for-business': {
+    navBg: 'linear-gradient(120deg, #F9FAFB 0%, #E5E7EB 18%, #111827 35%, #FEE2E2 50%, #111827 65%, #E5E7EB 82%, #F9FAFB 100%)',
+    border: 'rgba(220, 38, 38, 0.45)',
+    boxShadow: '0 4px 24px rgba(17, 24, 39, 0.35)',
+    linkColor: '#111827',
+    btnBg: '#DC2626',
+    btnColor: '#FFFFFF',
+    btnBorder: '#DC2626',
+    pageBg: 'linear-gradient(180deg, #F9FAFB 0%, #F3F4F6 30%, #FEE2E2 65%, #F9FAFB 100%)'
+  },
+  'for-institutions': {
+    navBg: 'linear-gradient(120deg, #F8FAFC 0%, #CFFAFE 18%, #0F172A 35%, #E0F2FE 50%, #0F172A 65%, #CFFAFE 82%, #F8FAFC 100%)',
+    border: 'rgba(6, 182, 212, 0.45)',
+    boxShadow: '0 4px 24px rgba(15, 23, 42, 0.35)',
+    linkColor: '#0F172A',
+    btnBg: '#06B6D4',
+    btnColor: '#0F172A',
+    btnBorder: '#06B6D4',
+    pageBg: 'linear-gradient(180deg, #F8FAFC 0%, #E0F2FE 30%, #F1F5F9 65%, #CFFAFE 100%)'
+  },
+  events: {
+    navBg: 'linear-gradient(120deg, #FFFFFF 0%, #EDE9FE 18%, #171717 35%, #F5F3FF 50%, #171717 65%, #EDE9FE 82%, #FFFFFF 100%)',
+    border: 'rgba(99, 102, 241, 0.45)',
+    boxShadow: '0 4px 24px rgba(23, 23, 23, 0.35)',
+    linkColor: '#171717',
+    btnBg: '#6366F1',
+    btnColor: '#FFFFFF',
+    btnBorder: '#6366F1',
+    pageBg: 'linear-gradient(180deg, #FAF5FF 0%, #EEF2FF 30%, #F5F3FF 65%, #EDE9FE 100%)'
+  },
+  'success-stories': {
+    navBg: 'linear-gradient(120deg, #FAF5FF 0%, #FBCFE8 18%, #581C87 35%, #FCE7F3 50%, #581C87 65%, #FBCFE8 82%, #FAF5FF 100%)',
+    border: 'rgba(236, 72, 153, 0.45)',
+    boxShadow: '0 4px 24px rgba(88, 28, 135, 0.25)',
+    linkColor: '#581C87',
+    btnBg: '#EC4899',
+    btnColor: '#FFFFFF',
+    btnBorder: '#EC4899',
+    pageBg: 'linear-gradient(180deg, #FAF5FF 0%, #F3E8FF 30%, #FCE7F3 65%, #FAF5FF 100%)'
+  },
+  about: {
+    navBg: 'linear-gradient(120deg, #EFF6FF 0%, #BFDBFE 18%, #1D4ED8 35%, #FAF8F5 50%, #1D4ED8 65%, #BFDBFE 82%, #EFF6FF 100%)',
+    border: 'rgba(29, 78, 216, 0.35)',
+    boxShadow: '0 4px 24px rgba(29, 78, 216, 0.20)',
+    linkColor: '#0F2D55',
+    btnBg: '#F59E0B',
+    btnColor: '#111827',
+    btnBorder: '#F59E0B',
+    pageBg: 'linear-gradient(180deg, #EFF6FF 0%, #FAF8F5 50%, #EFF6FF 100%)'
+  },
+  blog: {
+    navBg: 'linear-gradient(120deg, #F9FAFB 0%, #BFDBFE 18%, #1D4ED8 35%, #EFF6FF 50%, #1D4ED8 65%, #BFDBFE 82%, #F9FAFB 100%)',
+    border: 'rgba(29, 78, 216, 0.35)',
+    boxShadow: '0 4px 24px rgba(29, 78, 216, 0.20)',
+    linkColor: '#0F2D55',
+    btnBg: '#F59E0B',
+    btnColor: '#111827',
+    btnBorder: '#F59E0B',
+    pageBg: 'linear-gradient(180deg, #F9FAFB 0%, #EFF6FF 50%, #F9FAFB 100%)'
+  }
+};
+
+function applyActiveTheme(vName) {
+  const v = VIEWS.includes(vName) ? vName : 'home';
+  document.body.setAttribute('data-active-view', v);
+  document.documentElement.setAttribute('data-active-view', v);
+  
+  const th = PAGE_NAV_THEMES[v] || PAGE_NAV_THEMES.home;
+  // Use background-color so Body.png artwork (set via CSS) stays visible
+  document.body.style.removeProperty('background');
+  document.body.style.setProperty('background-color', 'transparent', 'important');
+
+  // Dynamically update view element backgrounds
+  const viewEl = document.getElementById('view-' + v);
+  if (viewEl) {
+    viewEl.style.background = th.pageBg;
+  }
+
+  const THEME_ACCENTS = {
+    home: { color: '#F59E0B', text: '#0B192C', border: '#FDE68A', glow: 'rgba(245, 158, 11, 0.45)' },
+    academy: { color: '#2563EB', text: '#FFFFFF', border: '#93C5FD', glow: 'rgba(37, 99, 235, 0.45)' },
+    technologies: { color: '#10B981', text: '#022C22', border: '#A7F3D0', glow: 'rgba(16, 185, 129, 0.45)' },
+    'innovation-lab': { color: '#FACC15', text: '#0F2D55', border: '#FEF08A', glow: 'rgba(250, 204, 21, 0.45)' },
+    startups: { color: '#EAB308', text: '#0B192C', border: '#FEF08A', glow: 'rgba(234, 179, 8, 0.45)' },
+    'for-business': { color: '#EF4444', text: '#FFFFFF', border: '#FCA5A5', glow: 'rgba(239, 68, 68, 0.45)' },
+    'for-institutions': { color: '#06B6D4', text: '#082F49', border: '#A5F3FC', glow: 'rgba(6, 182, 212, 0.45)' },
+    events: { color: '#8B5CF6', text: '#FFFFFF', border: '#DDD6FE', glow: 'rgba(139, 92, 246, 0.45)' },
+    'success-stories': { color: '#EC4899', text: '#FFFFFF', border: '#FBCFE8', glow: 'rgba(236, 72, 153, 0.45)' },
+    about: { color: '#2563EB', text: '#FFFFFF', border: '#93C5FD', glow: 'rgba(37, 99, 235, 0.45)' },
+    blog: { color: '#2563EB', text: '#FFFFFF', border: '#93C5FD', glow: 'rgba(37, 99, 235, 0.45)' }
+  };
+
+  const theme = THEME_ACCENTS[v] || THEME_ACCENTS.home;
+
+  // Unified luxury navy navbar with dynamic theme-color bottom border & glow
+  const navEl = document.querySelector('nav');
+  if (navEl) {
+    navEl.style.setProperty('background', 'rgba(11, 25, 44, 0.95)', 'important');
+    navEl.style.setProperty('border-bottom', '2.5px solid ' + theme.color, 'important');
+    navEl.style.setProperty('box-shadow', '0 4px 25px ' + theme.glow, 'important');
+  }
+
+  // Enquire Now CTA button matches active page theme
+  const navEnqBtn = document.querySelector('.nav-enq-btn');
+  if (navEnqBtn) {
+    navEnqBtn.style.setProperty('background', theme.color, 'important');
+    navEnqBtn.style.setProperty('color', theme.text, 'important');
+    navEnqBtn.style.setProperty('font-weight', '800', 'important');
+    navEnqBtn.style.setProperty('border', '1.5px solid ' + theme.border, 'important');
+    navEnqBtn.style.setProperty('box-shadow', '0 2px 12px ' + theme.glow, 'important');
+  }
+
+  // Update nav links: Crisp white, and vibrant solid pill matching the active page theme
+  document.querySelectorAll('#main-nav-links a').forEach(a => {
+    const isAct = a.dataset.r === v;
+    if (isAct) {
+      a.classList.add('on', 'active');
+      a.style.setProperty('color', theme.text, 'important');
+      a.style.setProperty('background', theme.color, 'important');
+      a.style.setProperty('font-weight', '800', 'important');
+      a.style.setProperty('border-radius', '99px', 'important');
+      a.style.setProperty('padding', '6px 16px', 'important');
+      a.style.setProperty('box-shadow', '0 4px 14px ' + theme.glow, 'important');
+      a.style.setProperty('border', '1.5px solid ' + theme.border, 'important');
+    } else {
+      a.classList.remove('on', 'active');
+      a.style.setProperty('color', '#E2E8F0', 'important');
+      a.style.setProperty('background', 'transparent', 'important');
+      a.style.setProperty('font-weight', '600', 'important');
+      a.style.setProperty('border-radius', '8px', 'important');
+      a.style.setProperty('padding', '6px 12px', 'important');
+      a.style.removeProperty('box-shadow');
+      a.style.removeProperty('border');
+    }
+  });
+
+  // Always keep logo text crisp, bold white with golden subtitle, and transparent logo image
+  const lgEl = document.querySelector('.lg');
+  if (lgEl) {
+    lgEl.style.setProperty('color', '#FFFFFF', 'important');
+    lgEl.style.setProperty('font-weight', '800', 'important');
+    const lgSub = lgEl.querySelector('small, .lg-sub');
+    if (lgSub) {
+      lgSub.style.setProperty('color', '#FBBF24', 'important');
+      lgSub.style.setProperty('font-weight', '700', 'important');
+      lgSub.style.setProperty('opacity', '1', 'important');
+    }
+    const lgImg = lgEl.querySelector('img, #lgi');
+    if (lgImg) {
+      lgImg.style.setProperty('border', 'none', 'important');
+      lgImg.style.setProperty('box-shadow', 'none', 'important');
+      lgImg.style.setProperty('background', 'transparent', 'important');
+      lgImg.style.setProperty('filter', 'drop-shadow(0 2px 8px rgba(0, 0, 0, 0.55))', 'important');
+      lgImg.src = '/website/images/od_ai_hub_logo_circle.png';
+    }
+  }
+}
+
 function route() {
-  const rawHash = location.hash.replace(/^#\/?/, '').trim() || 'home';
+  const rawHash = decodeURIComponent(location.hash.replace(/^#\/?/, '').trim());
+  
+  // Normalize dashes, spaces, and lowercase
+  let normalizedHash = rawHash.replace(/%20|\s+/g, '-').toLowerCase();
+  if (normalizedHash === 'success-story') normalizedHash = 'success-stories';
+  if (normalizedHash === 'institution' || normalizedHash === 'institutions') normalizedHash = 'for-institutions';
+  if (normalizedHash === 'technology') normalizedHash = 'technologies';
+  if (normalizedHash === 'business') normalizedHash = 'for-business';
+  if (normalizedHash === 'startup') normalizedHash = 'startups';
+  if (normalizedHash === 'innovation') normalizedHash = 'innovation-lab';
+  if (!normalizedHash) normalizedHash = 'home';
 
   // Redirect any hash academy/{slug} directly to /programs?category={slug}
-  if (rawHash.startsWith('academy/')) {
-    const slug = rawHash.replace(/^academy\//, '').trim().toLowerCase();
+  if (normalizedHash.startsWith('academy/')) {
+    const slug = normalizedHash.replace(/^academy\//, '').trim().toLowerCase();
     window.location.href = `/programs?category=${slug}`;
     return;
   }
 
   // If #ring, activate academy view and smoothly scroll down to 3D ring!
-  if (rawHash === 'ring') {
+  if (normalizedHash === 'ring') {
+    applyActiveTheme('academy');
     VIEWS.forEach(v => {
       const el = $('view-' + v);
       if (el) el.hidden = (v !== 'academy');
@@ -1790,59 +2053,6 @@ function route() {
     document.getElementById('ring')?.scrollIntoView({ behavior: 'instant', block: 'start' });
     return;
   }
-
-  // If in-page anchor like #grid-technologies or #about
-  const anchorEl = document.getElementById(rawHash);
-  if (anchorEl) {
-    const parentView = anchorEl.closest('.view');
-    if (parentView && parentView.id) {
-      const vName = parentView.id.replace(/^view-/, '');
-      if (VIEWS.includes(vName)) {
-        VIEWS.forEach(v => {
-          const el = $('view-' + v);
-          if (el) el.hidden = (v !== vName);
-        });
-        document.querySelectorAll('#main-nav-links a[data-r]').forEach(a => {
-          a.classList.toggle('on', a.dataset.r === vName);
-        });
-        const titles = {
-          home: 'OD AI HUB – A Brighter Odisha Through AI',
-          academy: 'OD AI Academy – Learn Today. Lead Tomorrow.',
-          technologies: 'OD AI Technologies – Solutions & Automation',
-          'innovation-lab': 'OD AI Innovation Lab – Prototyping & R&D',
-          startups: 'OD AI Startups – From Ideas to Impact',
-          'for-business': 'For Business – AI & Growth Solutions',
-          'for-institutions': 'For Institutions – Schools & Colleges',
-          events: 'Events & Hackathons – OD AI HUB',
-          'success-stories': 'Success Stories – Real People. Real Impact.',
-          about: 'About OD AI HUB – Berhampur, Odisha',
-          blog: 'Blog & Articles – OD AI HUB'
-        };
-        document.title = titles[vName] || 'OD AI HUB';
-        if (vName === 'blog') loadBlogPosts();
-        if (vName === 'events' || vName === 'success-stories' || vName === 'academy') {
-          syncFromBackend();
-        }
-        setTimeout(() => {
-          anchorEl.scrollIntoView({ behavior: 'instant', block: 'start' });
-          syncNavbarScroll();
-        }, 50);
-        return;
-      }
-    }
-  }
-
-  // Regular views
-  const targetView = VIEWS.includes(rawHash) ? rawHash : 'home';
-
-  VIEWS.forEach(v => {
-    const el = $('view-' + v);
-    if (el) el.hidden = (v !== targetView);
-  });
-
-  document.querySelectorAll('#main-nav-links a[data-r]').forEach(a => {
-    a.classList.toggle('on', a.dataset.r === targetView);
-  });
 
   const titles = {
     home: 'OD AI HUB – A Brighter Odisha Through AI',
@@ -1857,13 +2067,68 @@ function route() {
     about: 'About OD AI HUB – Berhampur, Odisha',
     blog: 'Blog & Articles – OD AI HUB'
   };
-  document.title = titles[targetView] || 'OD AI HUB';
-  scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' });
-  syncNavbarScroll();
-  if (targetView === 'blog') loadBlogPosts();
-  if (targetView === 'events' || targetView === 'success-stories' || targetView === 'academy') {
-    syncFromBackend();
+
+  // 1. CHECK PAGE VIEWS FIRST! (This guarantees #/about opens #view-about, not scrolling to #about anchor inside home)
+  if (VIEWS.includes(normalizedHash)) {
+    applyActiveTheme(normalizedHash);
+    VIEWS.forEach(v => {
+      const el = $('view-' + v);
+      if (el) el.hidden = (v !== normalizedHash);
+    });
+    document.querySelectorAll('#main-nav-links a[data-r]').forEach(a => {
+      a.classList.toggle('on', a.dataset.r === normalizedHash);
+    });
+    document.title = titles[normalizedHash] || 'OD AI HUB';
+    scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' });
+    syncNavbarScroll();
+    if (normalizedHash === 'blog') loadBlogPosts();
+    if (normalizedHash === 'events' || normalizedHash === 'success-stories' || normalizedHash === 'academy') {
+      syncFromBackend();
+    }
+    return;
   }
+
+  // 2. If in-page anchor like #grid-technologies or #home-about
+  const anchorEl = document.getElementById(rawHash) || document.getElementById(normalizedHash);
+  if (anchorEl) {
+    const parentView = anchorEl.closest('.view');
+    if (parentView && parentView.id) {
+      const vName = parentView.id.replace(/^view-/, '');
+      if (VIEWS.includes(vName)) {
+        applyActiveTheme(vName);
+        VIEWS.forEach(v => {
+          const el = $('view-' + v);
+          if (el) el.hidden = (v !== vName);
+        });
+        document.querySelectorAll('#main-nav-links a[data-r]').forEach(a => {
+          a.classList.toggle('on', a.dataset.r === vName);
+        });
+        document.title = titles[vName] || 'OD AI HUB';
+        if (vName === 'blog') loadBlogPosts();
+        if (vName === 'events' || vName === 'success-stories' || vName === 'academy') {
+          syncFromBackend();
+        }
+        setTimeout(() => {
+          anchorEl.scrollIntoView({ behavior: 'instant', block: 'start' });
+          syncNavbarScroll();
+        }, 50);
+        return;
+      }
+    }
+  }
+
+  // 3. Fallback to home
+  applyActiveTheme('home');
+  VIEWS.forEach(v => {
+    const el = $('view-' + v);
+    if (el) el.hidden = (v !== 'home');
+  });
+  document.querySelectorAll('#main-nav-links a[data-r]').forEach(a => {
+    a.classList.toggle('on', a.dataset.r === 'home');
+  });
+  document.title = titles.home;
+  scrollTo({ top: 0, behavior: 'auto' });
+  syncNavbarScroll();
 }
 
 // Dynamic Navbar Scroll State (Translucent over Hero, Solid Cream Scrolled)

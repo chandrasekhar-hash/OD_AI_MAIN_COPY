@@ -339,6 +339,26 @@ def update_enquiry_status(db: Session, enquiry_id: int, status: str) -> Optional
     db.refresh(enq)
     return enq
 
+def update_enquiry(db: Session, enquiry_id: int, data) -> Optional[Enquiry]:
+    enq = get_enquiry(db, enquiry_id)
+    if not enq:
+        return None
+    data_dict = data.dict(exclude_unset=True) if hasattr(data, 'dict') else dict(data)
+    for field, value in data_dict.items():
+        if hasattr(enq, field) and value is not None:
+            setattr(enq, field, value)
+    db.commit()
+    db.refresh(enq)
+    return enq
+
+def delete_enquiry(db: Session, enquiry_id: int) -> bool:
+    enq = get_enquiry(db, enquiry_id)
+    if not enq:
+        return False
+    db.delete(enq)
+    db.commit()
+    return True
+
 def export_enquiries_csv(db: Session, status: Optional[str] = None) -> str:
     enquiries = get_enquiries(db, status=status, limit=5000)
     output = io.StringIO()

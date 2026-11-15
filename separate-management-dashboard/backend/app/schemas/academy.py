@@ -192,6 +192,15 @@ class EnquiryStatusUpdate(BaseModel):
             raise ValueError(f"Status must be one of {allowed}")
         return v.lower()
 
+class EnquiryUpdate(BaseModel):
+    name: Optional[str] = None
+    phone: Optional[str] = None
+    email: Optional[str] = None
+    class_or_degree: Optional[str] = None
+    message: Optional[str] = None
+    course_id: Optional[int] = None
+    status: Optional[str] = None
+
 class EnquiryResponse(BaseModel):
     id: int
     name: str

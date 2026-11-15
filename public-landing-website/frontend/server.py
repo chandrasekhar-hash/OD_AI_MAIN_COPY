@@ -35,16 +35,43 @@ IMAGES_DIR = os.path.join(STATIC_DIR, "images")
 PUBLIC_BACKEND_URL = "http://localhost:8001"
 client = httpx.AsyncClient(base_url=PUBLIC_BACKEND_URL, timeout=30.0)
 
+# Direct Customization route so changes from Management Dashboard take effect instantly with or without backend
+@app.get("/api/v1/website/customization", include_in_schema=False)
+@app.get("/api/website/customization", include_in_schema=False)
+@app.get("/customization.json", include_in_schema=False)
+def get_customization_json():
+    paths = [
+        os.path.join(FRONTEND_DIR, "customization.json"),
+        os.path.join(os.path.dirname(FRONTEND_DIR), "database", "customization.json"),
+        os.path.join(os.path.dirname(os.path.dirname(FRONTEND_DIR)), "separate-management-dashboard", "database", "customization.json"),
+        os.path.join(os.path.dirname(os.path.dirname(FRONTEND_DIR)), "js-public-site", "database", "customization.json"),
+    ]
+    for p in paths:
+        if os.path.exists(p):
+            try:
+                with open(p, "r", encoding="utf-8") as f:
+                    return json.load(f)
+            except Exception:
+                pass
+    return {
+        "theme_mode": "light",
+        "logo_url": "/website/images/od_ai_hub_logo_circle.png",
+        "backgrounds": {},
+        "combos": {},
+        "text_colors": {}
+    }
+
+@app.api_route("/api/v1/{path:path}", methods=["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS", "HEAD"], include_in_schema=False)
 @app.api_route("/api/{path:path}", methods=["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS", "HEAD"], include_in_schema=False)
 async def proxy_api(path: str, request: Request):
-    url = f"/api/{path}"
+    full_path = request.url.path
     headers = dict(request.headers)
     headers.pop("host", None)
     content = await request.body()
     try:
         rp_resp = await client.request(
             method=request.method,
-            url=url,
+            url=full_path,
             headers=headers,
             params=request.query_params,
             content=content
@@ -80,6 +107,11 @@ def index():
 @app.get("/programs.html", include_in_schema=False)
 def programs():
     return FileResponse(os.path.join(FRONTEND_DIR, "programs.html"))
+
+@app.get("/about", include_in_schema=False)
+@app.get("/about.html", include_in_schema=False)
+def about():
+    return FileResponse(os.path.join(FRONTEND_DIR, "about.html"))
 
 @app.get("/soon", include_in_schema=False)
 def soon():

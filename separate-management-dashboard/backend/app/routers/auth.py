@@ -24,8 +24,23 @@ def register(user_in: UserCreate, db: Session = Depends(get_db)):
 
 @router.post("/login", response_model=Token)
 def login(login_req: LoginRequest, db: Session = Depends(get_db)):
-    user = user_crud.get_user_by_username(db, login_req.username)
-    if not user or not verify_password(login_req.password, user.hashed_password):
+    identifier = (login_req.username or "").strip()
+    raw_password = (login_req.password or "").strip()
+    
+    # Try by username exact, then case-insensitive, then by email
+    user = user_crud.get_user_by_username(db, identifier)
+    if not user:
+        from app.models.user import User
+        from sqlalchemy import func
+        user = db.query(User).filter(func.lower(User.username) == identifier.lower()).first()
+    if not user:
+        user = user_crud.get_user_by_email(db, identifier)
+    if not user:
+        from app.models.user import User
+        from sqlalchemy import func
+        user = db.query(User).filter(func.lower(User.email) == identifier.lower()).first()
+
+    if not user or not verify_password(raw_password, user.hashed_password):
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail="Incorrect username or password",

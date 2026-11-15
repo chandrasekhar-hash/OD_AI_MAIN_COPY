@@ -840,6 +840,26 @@ def admin_save_customization(data: dict, current_user=Depends(require_role(["adm
     os.makedirs(os.path.dirname(CUSTOMIZATION_FILE), exist_ok=True)
     with open(CUSTOMIZATION_FILE, "w", encoding="utf-8") as f:
         json.dump(data, f, indent=2)
+    
+    # Broadcast & sync directly to all public website database and frontend folders
+    try:
+        REPO_ROOT = os.path.dirname(os.path.dirname(BASE_DIR))
+        targets = [
+            os.path.join(REPO_ROOT, "public-landing-website", "database", "customization.json"),
+            os.path.join(REPO_ROOT, "public-landing-website", "frontend", "customization.json"),
+            os.path.join(REPO_ROOT, "js-public-site", "database", "customization.json"),
+            os.path.join(REPO_ROOT, "js-public-site", "frontend", "customization.json"),
+        ]
+        for t in targets:
+            try:
+                os.makedirs(os.path.dirname(t), exist_ok=True)
+                with open(t, "w", encoding="utf-8") as f:
+                    json.dump(data, f, indent=2)
+            except Exception:
+                pass
+    except Exception as e:
+        pass
+    
     return {"message": "Customization saved successfully", "data": data}
 
 @router.post("/customization/upload")
@@ -849,11 +869,18 @@ async def admin_upload_customization_asset(
 ):
     REPO_ROOT = os.path.dirname(os.path.dirname(BASE_DIR))
     pub_images = os.path.join(REPO_ROOT, "public-landing-website", "frontend", "images")
+    js_images = os.path.join(REPO_ROOT, "js-public-site", "frontend", "images")
     os.makedirs(pub_images, exist_ok=True)
+    os.makedirs(js_images, exist_ok=True)
     filename = file.filename.replace(" ", "_")
     target_path = os.path.join(pub_images, filename)
     with open(target_path, "wb") as buffer:
         shutil.copyfileobj(file.file, buffer)
+    
+    try:
+        shutil.copy(target_path, os.path.join(js_images, filename))
+    except Exception:
+        pass
     
     mgmt_uploads = os.path.join(BASE_DIR, "uploads")
     os.makedirs(mgmt_uploads, exist_ok=True)

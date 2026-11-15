@@ -8,6 +8,7 @@ const PillarSectionsSection = ({ isEditor, isAdmin, setToast }) => {
   const [loading, setLoading] = useState(true);
   const [editingSection, setEditingSection] = useState(null);
   const [saving, setSaving] = useState(false);
+  const [uploadingImage, setUploadingImage] = useState(false);
 
   const [filterPillar, setFilterPillar] = useState('');
   const [filterAudience, setFilterAudience] = useState('');
@@ -59,6 +60,26 @@ const PillarSectionsSection = ({ isEditor, isAdmin, setToast }) => {
   useEffect(() => {
     fetchSections();
   }, [filterPillar, filterAudience, filterStatus, searchTerm]);
+
+  const handleImageUpload = async (e) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    setUploadingImage(true);
+    try {
+      const formData = new FormData();
+      formData.append('file', file);
+      const res = await websiteAdminApi.uploadCustomizationAsset(formData);
+      if (res?.url) {
+        setEditingSection((prev) => ({ ...prev, image_url: res.url }));
+        setToast({ message: 'Image uploaded successfully!', type: 'success' });
+      }
+    } catch (err) {
+      console.error(err);
+      setToast({ message: 'Image upload failed. Please try again.', type: 'error' });
+    } finally {
+      setUploadingImage(false);
+    }
+  };
 
   const handleSearchSubmit = (e) => {
     e.preventDefault();
@@ -432,14 +453,50 @@ const PillarSectionsSection = ({ isEditor, isAdmin, setToast }) => {
               </div>
 
               <div>
-                <label className="block font-semibold mb-1">Image URL</label>
-                <input
-                  type="url"
-                  value={editingSection.image_url || ''}
-                  onChange={(e) => setEditingSection({ ...editingSection, image_url: e.target.value })}
-                  className="w-full px-3 py-2 rounded-xl border border-outline-variant bg-surface outline-none"
-                  placeholder="https://example.com/image.jpg"
-                />
+                <label className="block font-semibold mb-1">Image URL or Upload</label>
+                <div className="flex gap-2 items-center">
+                  <input
+                    type="text"
+                    value={editingSection.image_url || ''}
+                    onChange={(e) => setEditingSection({ ...editingSection, image_url: e.target.value })}
+                    className="flex-1 px-3 py-2 rounded-xl border border-outline-variant bg-surface outline-none"
+                    placeholder="https://example.com/image.jpg or /static/uploads/..."
+                  />
+                  <label className="px-3 py-2 rounded-xl border border-primary/40 bg-primary/10 text-primary font-semibold text-xs cursor-pointer hover:bg-primary/20 flex items-center gap-1.5 transition-colors whitespace-nowrap">
+                    <span className="material-symbols-outlined text-sm">
+                      {uploadingImage ? 'progress_activity' : 'upload_file'}
+                    </span>
+                    <span>{uploadingImage ? 'Uploading...' : 'Upload'}</span>
+                    <input
+                      type="file"
+                      accept="image/*"
+                      onChange={handleImageUpload}
+                      disabled={uploadingImage}
+                      className="hidden"
+                    />
+                  </label>
+                </div>
+                {editingSection.image_url && (
+                  <div className="mt-2 p-2 rounded-xl bg-surface-container border border-outline-variant/30 flex items-center gap-3">
+                    <img
+                      src={editingSection.image_url}
+                      alt="Preview"
+                      className="w-14 h-14 rounded-lg object-cover border border-outline-variant/40"
+                      onError={(e) => { e.currentTarget.style.display = 'none'; }}
+                    />
+                    <div className="flex-1 min-w-0">
+                      <span className="text-[11px] font-semibold text-outline block">Preview</span>
+                      <span className="text-xs text-on-surface truncate block font-mono">{editingSection.image_url}</span>
+                    </div>
+                    <button
+                      type="button"
+                      onClick={() => setEditingSection({ ...editingSection, image_url: '' })}
+                      className="text-xs text-error hover:underline px-2 py-1"
+                    >
+                      Remove
+                    </button>
+                  </div>
+                )}
               </div>
 
               <div className="grid grid-cols-2 gap-3 items-center">

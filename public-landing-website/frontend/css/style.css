@@ -212,10 +212,10 @@ nav, #navbar {
   right: 0 !important;
   height: 64px !important;
   z-index: 99 !important;
-  background: linear-gradient(120deg, #FFFFFF 0%, #B8D9F8 12%, #2563EB 28%, #EAF4FF 44%, #1A4FA0 58%, #A8D0F5 72%, #FFFFFF 85%, #3B82C4 100%) !important;
-  backdrop-filter: blur(16px) !important;
-  -webkit-backdrop-filter: blur(16px) !important;
-  border-bottom: 1.5px solid rgba(22, 59, 107, 0.30) !important;
+  background: rgba(11, 25, 44, 0.95) !important;
+  backdrop-filter: blur(20px) !important;
+  -webkit-backdrop-filter: blur(20px) !important;
+  border-bottom: 2px solid #F59E0B !important;
   display: flex !important;
   flex-direction: row !important;
   flex-wrap: nowrap !important;
@@ -223,7 +223,7 @@ nav, #navbar {
   justify-content: space-between !important;
   gap: 16px !important;
   padding: 0 clamp(16px, 3.5vw, 40px) !important;
-  box-shadow: 0 4px 24px rgba(22, 59, 107, 0.35) !important;
+  box-shadow: 0 4px 25px rgba(0, 0, 0, 0.45) !important;
   box-sizing: border-box !important;
 }
 
@@ -231,26 +231,30 @@ nav, #navbar {
   display: flex !important;
   align-items: center !important;
   gap: 10px !important;
-  font: 700 18px var(--font-display, "Cormorant Garamond", Georgia, serif) !important;
-  letter-spacing: .01em !important;
-  color: #0F2D55 !important;
+  font: 800 19px var(--font-display, "Cormorant Garamond", Georgia, serif) !important;
+  letter-spacing: .02em !important;
+  color: #FFFFFF !important;
   flex-shrink: 0 !important;
   text-decoration: none !important;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.6) !important;
 }
 .lg img, #lgi {
   border-radius: 50% !important;
   object-fit: cover !important;
-  border: 1.5px solid rgba(22, 59, 107, 0.35) !important;
+  border: 2px solid #F59E0B !important;
+  box-shadow: 0 0 10px rgba(245, 158, 11, 0.45) !important;
   width: 40px !important;
   height: 40px !important;
   flex-shrink: 0 !important;
 }
 .lg small, .lg-sub {
   display: block !important;
-  font: 400 10px var(--font-sans, "Inter", sans-serif) !important;
-  color: rgba(15, 45, 85, 0.75) !important;
-  letter-spacing: .04em !important;
+  font: 700 10px var(--font-sans, "Inter", sans-serif) !important;
+  color: #FBBF24 !important;
+  letter-spacing: .08em !important;
   text-transform: uppercase !important;
+  opacity: 1 !important;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.7) !important;
 }
 
 .lk, #main-nav-links, #nav-links {
@@ -262,23 +266,28 @@ nav, #navbar {
   align-items: center !important;
 }
 .lk a {
-  font: 500 13px var(--font-sans, "Inter", sans-serif) !important;
-  color: #0F2D55 !important;
-  padding: 6px 10px !important;
-  border-radius: 6px !important;
+  font: 600 13.5px var(--font-sans, "Inter", sans-serif) !important;
+  color: #E2E8F0 !important;
+  padding: 6px 12px !important;
+  border-radius: 8px !important;
   text-decoration: none !important;
   white-space: nowrap !important;
   transition: color .2s, background .2s !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5) !important;
 }
 .lk a:hover {
-  color: #163B6B !important;
-  background: rgba(22, 59, 107, 0.12) !important;
+  color: #FFFFFF !important;
+  background: rgba(255, 255, 255, 0.14) !important;
 }
-.lk a.on {
-  color: #163B6B !important;
-  background: rgba(22, 59, 107, 0.18) !important;
-  font-weight: 600 !important;
-  box-shadow: inset 0 -2px 0 0 #163B6B !important;
+.lk a.on, .lk a.active, .lk a[aria-current="page"] {
+  color: #0B192C !important;
+  background: linear-gradient(135deg, #F59E0B 0%, #D97706 100%) !important;
+  font-weight: 800 !important;
+  border-radius: 99px !important;
+  padding: 6px 16px !important;
+  box-shadow: 0 4px 14px rgba(245, 158, 11, 0.55) !important;
+  border: 1px solid #FDE68A !important;
+  text-shadow: none !important;
 }
 
 .nav-actions {
@@ -2523,9 +2532,10 @@ footer .c{max-width:1240px;margin:28px auto 0;border-top:1px solid rgba(255,255,
 
 #grid-success-stories .story-quote {
   font-style: italic !important;
-  font-size: 13.5px !important;
+  font-size: 14px !important;
   line-height: 1.68 !important;
-  color: rgba(244, 240, 232, 0.85) !important;
+  color: #111827 !important;
+  font-weight: 600 !important;
   margin: 0 0 16px !important;
   flex: 1 1 auto !important;
 }

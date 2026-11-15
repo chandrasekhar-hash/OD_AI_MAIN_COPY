@@ -2,10 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { academyAdminApi } from '../../api/academyAdminApi';
 
 const AcademyEnquiriesSection = ({ isEditor, setToast }) => {
+  const canEdit = isEditor !== false;
   const [enquiries, setEnquiries] = useState([]);
   const [loading, setLoading] = useState(true);
   const [selectedStatus, setSelectedStatus] = useState('all');
   const [activeEnquiry, setActiveEnquiry] = useState(null);
+  const [editingEnquiry, setEditingEnquiry] = useState(null);
+  const [savingEdit, setSavingEdit] = useState(false);
   const [exporting, setExporting] = useState(false);
 
   const fetchEnquiries = async () => {
@@ -37,6 +40,60 @@ const AcademyEnquiriesSection = ({ isEditor, setToast }) => {
     } catch (err) {
       console.error(err);
       setToast({ message: 'Failed to update status', type: 'error' });
+    }
+  };
+
+  const handleEdit = (enq) => {
+    setEditingEnquiry({
+      id: enq.id,
+      name: enq.name || '',
+      phone: enq.phone || '',
+      email: enq.email || '',
+      class_or_degree: enq.class_or_degree || '',
+      course_title: enq.course_title || '',
+      message: enq.message || '',
+      status: enq.status || 'new'
+    });
+  };
+
+  const handleSaveEdit = async (e) => {
+    e.preventDefault();
+    if (!editingEnquiry) return;
+    setSavingEdit(true);
+    try {
+      await academyAdminApi.updateEnquiry(editingEnquiry.id, {
+        name: editingEnquiry.name,
+        phone: editingEnquiry.phone,
+        email: editingEnquiry.email,
+        class_or_degree: editingEnquiry.class_or_degree,
+        status: editingEnquiry.status,
+        message: editingEnquiry.message
+      });
+      setToast({ message: `Enquiry #${editingEnquiry.id} updated and saved successfully!`, type: 'success' });
+      setEditingEnquiry(null);
+      if (activeEnquiry && activeEnquiry.id === editingEnquiry.id) {
+        setActiveEnquiry(editingEnquiry);
+      }
+      fetchEnquiries();
+    } catch (err) {
+      console.error(err);
+      setToast({ message: 'Failed to save enquiry changes', type: 'error' });
+    } finally {
+      setSavingEdit(false);
+    }
+  };
+
+  const handleDelete = async (id, name) => {
+    if (!window.confirm(`Permanently delete enquiry #${id} for "${name}"?`)) return;
+    try {
+      await academyAdminApi.deleteEnquiry(id);
+      setToast({ message: `Enquiry #${id} deleted successfully`, type: 'success' });
+      if (activeEnquiry && activeEnquiry.id === id) setActiveEnquiry(null);
+      if (editingEnquiry && editingEnquiry.id === id) setEditingEnquiry(null);
+      fetchEnquiries();
+    } catch (err) {
+      console.error(err);
+      setToast({ message: 'Failed to delete enquiry', type: 'error' });
     }
   };
 
@@ -165,12 +222,29 @@ const AcademyEnquiriesSection = ({ isEditor, setToast }) => {
                       <button
                         onClick={() => setActiveEnquiry(enq)}
                         className="px-2.5 py-1 rounded-lg bg-surface-container hover:bg-surface-container-high text-primary font-semibold"
+                        title="View Details"
                       >
                         Details
                       </button>
 
-                      {isEditor && (
+                      {canEdit && (
                         <>
+                          <button
+                            onClick={() => handleEdit(enq)}
+                            className="px-2.5 py-1 rounded-lg bg-primary/10 text-primary hover:bg-primary/20 font-semibold"
+                            title="Edit Record"
+                          >
+                            Edit
+                          </button>
+
+                          <button
+                            onClick={() => handleDelete(enq.id, enq.name)}
+                            className="px-2 py-1 rounded-lg bg-error/10 text-error hover:bg-error/20 font-semibold"
+                            title="Delete Record"
+                          >
+                            <span className="material-symbols-outlined text-sm align-middle">delete</span>
+                          </button>
+
                           {enq.status === 'new' && (
                             <button
                               onClick={() => handleStatusUpdate(enq.id, 'contacted')}
@@ -260,13 +334,35 @@ const AcademyEnquiriesSection = ({ isEditor, setToast }) => {
             </div>
 
             <div className="flex justify-end gap-2 pt-3 border-t border-outline-variant/20">
-              {isEditor && activeEnquiry.status !== 'closed' && (
-                <button
-                  onClick={() => handleStatusUpdate(activeEnquiry.id, 'closed')}
-                  className="px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-semibold text-xs transition-colors"
-                >
-                  Mark as Closed
-                </button>
+              {canEdit && (
+                <>
+                  <button
+                    onClick={() => {
+                      const item = activeEnquiry;
+                      setActiveEnquiry(null);
+                      handleEdit(item);
+                    }}
+                    className="px-4 py-2 rounded-xl bg-primary text-on-primary font-semibold text-xs hover:bg-primary/90 transition-colors flex items-center gap-1"
+                  >
+                    <span className="material-symbols-outlined text-xs">edit</span>
+                    Edit Record
+                  </button>
+                  <button
+                    onClick={() => handleDelete(activeEnquiry.id, activeEnquiry.name)}
+                    className="px-4 py-2 rounded-xl bg-error/15 text-error font-semibold text-xs hover:bg-error/25 transition-colors flex items-center gap-1"
+                  >
+                    <span className="material-symbols-outlined text-xs">delete</span>
+                    Delete
+                  </button>
+                  {activeEnquiry.status !== 'closed' && (
+                    <button
+                      onClick={() => handleStatusUpdate(activeEnquiry.id, 'closed')}
+                      className="px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-semibold text-xs transition-colors"
+                    >
+                      Mark as Closed
+                    </button>
+                  )}
+                </>
               )}
               <button
                 onClick={() => setActiveEnquiry(null)}
@@ -275,6 +371,135 @@ const AcademyEnquiriesSection = ({ isEditor, setToast }) => {
                 Close View
               </button>
             </div>
+          </div>
+        </div>
+      )}
+
+      {/* Edit & Save Enquiry Modal */}
+      {editingEnquiry && (
+        <div
+          className="fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex items-center justify-center p-4"
+          onClick={() => setEditingEnquiry(null)}
+        >
+          <div
+            className="bg-surface-container-lowest max-w-lg w-full rounded-2xl border border-outline-variant/30 shadow-2xl p-6 space-y-4 animate-in fade-in zoom-in-95 duration-150"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="flex justify-between items-start">
+              <div>
+                <span className="px-2 py-0.5 rounded text-[11px] font-bold bg-primary/10 text-primary uppercase tracking-wider">
+                  Edit Enquiry #{editingEnquiry.id}
+                </span>
+                <h3 className="font-headline text-lg font-bold text-on-surface mt-1">
+                  Edit Learner Information
+                </h3>
+              </div>
+              <button
+                onClick={() => setEditingEnquiry(null)}
+                className="text-on-surface-variant hover:text-on-surface p-1 rounded-lg"
+              >
+                ✕
+              </button>
+            </div>
+
+            <form onSubmit={handleSaveEdit} className="space-y-3.5 text-xs">
+              <div>
+                <label className="block font-semibold mb-1 text-on-surface">Learner Name *</label>
+                <input
+                  type="text"
+                  required
+                  value={editingEnquiry.name}
+                  onChange={(e) => setEditingEnquiry({ ...editingEnquiry, name: e.target.value })}
+                  className="w-full px-3 py-2 rounded-xl border border-outline-variant/40 bg-surface text-on-surface focus:outline-none focus:ring-1 focus:ring-primary"
+                />
+              </div>
+
+              <div className="grid grid-cols-2 gap-3">
+                <div>
+                  <label className="block font-semibold mb-1 text-on-surface">Phone Number *</label>
+                  <input
+                    type="text"
+                    required
+                    value={editingEnquiry.phone}
+                    onChange={(e) => setEditingEnquiry({ ...editingEnquiry, phone: e.target.value })}
+                    className="w-full px-3 py-2 rounded-xl border border-outline-variant/40 bg-surface text-on-surface focus:outline-none focus:ring-1 focus:ring-primary font-mono"
+                  />
+                </div>
+                <div>
+                  <label className="block font-semibold mb-1 text-on-surface">Email Address</label>
+                  <input
+                    type="email"
+                    value={editingEnquiry.email}
+                    onChange={(e) => setEditingEnquiry({ ...editingEnquiry, email: e.target.value })}
+                    className="w-full px-3 py-2 rounded-xl border border-outline-variant/40 bg-surface text-on-surface focus:outline-none focus:ring-1 focus:ring-primary"
+                  />
+                </div>
+              </div>
+
+              <div className="grid grid-cols-2 gap-3">
+                <div>
+                  <label className="block font-semibold mb-1 text-on-surface">Course / Target Program</label>
+                  <input
+                    type="text"
+                    value={editingEnquiry.course_title}
+                    onChange={(e) => setEditingEnquiry({ ...editingEnquiry, course_title: e.target.value })}
+                    placeholder="e.g. AI & Robotics Masterclass"
+                    className="w-full px-3 py-2 rounded-xl border border-outline-variant/40 bg-surface text-on-surface focus:outline-none focus:ring-1 focus:ring-primary"
+                  />
+                </div>
+                <div>
+                  <label className="block font-semibold mb-1 text-on-surface">Class / Degree</label>
+                  <input
+                    type="text"
+                    value={editingEnquiry.class_or_degree}
+                    onChange={(e) => setEditingEnquiry({ ...editingEnquiry, class_or_degree: e.target.value })}
+                    placeholder="e.g. Class 11, B.Tech, Working Pro"
+                    className="w-full px-3 py-2 rounded-xl border border-outline-variant/40 bg-surface text-on-surface focus:outline-none focus:ring-1 focus:ring-primary"
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label className="block font-semibold mb-1 text-on-surface">Status</label>
+                <select
+                  value={editingEnquiry.status}
+                  onChange={(e) => setEditingEnquiry({ ...editingEnquiry, status: e.target.value })}
+                  className="w-full px-3 py-2 rounded-xl border border-outline-variant/40 bg-surface text-on-surface focus:outline-none focus:ring-1 focus:ring-primary"
+                >
+                  <option value="new">New</option>
+                  <option value="contacted">Contacted</option>
+                  <option value="closed">Closed</option>
+                </select>
+              </div>
+
+              <div>
+                <label className="block font-semibold mb-1 text-on-surface">Message / Enquiry Notes</label>
+                <textarea
+                  rows={3}
+                  value={editingEnquiry.message}
+                  onChange={(e) => setEditingEnquiry({ ...editingEnquiry, message: e.target.value })}
+                  className="w-full px-3 py-2 rounded-xl border border-outline-variant/40 bg-surface text-on-surface focus:outline-none focus:ring-1 focus:ring-primary"
+                />
+              </div>
+
+              <div className="flex items-center justify-end gap-2 pt-3 border-t border-outline-variant/20">
+                <button
+                  type="button"
+                  onClick={() => setEditingEnquiry(null)}
+                  className="px-4 py-2 rounded-xl bg-surface-container hover:bg-surface-container-high text-on-surface font-semibold text-xs transition-colors"
+                >
+                  Cancel
+                </button>
+                <button
+                  type="submit"
+                  disabled={savingEdit}
+                  className="px-5 py-2 rounded-xl bg-primary text-on-primary font-bold text-xs shadow-sm hover:bg-primary/90 transition-all flex items-center gap-1.5 disabled:opacity-50"
+                >
+                  <span className="material-symbols-outlined text-sm">save</span>
+                  {savingEdit ? 'Saving...' : 'Save & Update Record'}
+                </button>
+              </div>
+            </form>
           </div>
         </div>
       )}

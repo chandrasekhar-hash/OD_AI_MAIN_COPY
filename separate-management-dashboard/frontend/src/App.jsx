@@ -7,6 +7,7 @@ import Footer from './components/common/Footer';
 import ServerWakeupBanner from './components/common/ServerWakeupBanner';
 import ManagementConsole from './components/management/ManagementConsole';
 import UsersAdminPage from './pages/UsersAdminPage';
+import AuthPage from './pages/AuthPage';
 
 function App() {
   return (
@@ -20,6 +21,9 @@ function App() {
               <Routes>
                 <Route path="/" element={<ManagementConsole />} />
                 <Route path="/management" element={<ManagementConsole />} />
+                <Route path="/login" element={<AuthPage />} />
+                <Route path="/signup" element={<AuthPage />} />
+                <Route path="/auth" element={<AuthPage />} />
                 <Route path="/admin/users" element={<UsersAdminPage />} />
                 <Route path="/users" element={<UsersAdminPage />} />
                 <Route path="*" element={<Navigate to="/" replace />} />

@@ -1,9 +1,12 @@
 {
   "theme_mode": "light",
-  "logo_url": "/website/images/od_ai_hub_logo_circle.png",
+  "logo_url": "/website/images/IMG-20261015-WA0000.jpg",
+  "logo_size": 42,
+  "font_display": "'Cormorant Garamond', Georgia, serif",
+  "font_body": "'Inter', sans-serif",
   "backgrounds": {
-    "home_hero": "",
-    "academy": "/website/images/Academy.png",
+    "home_hero": "/website/images/IMG-20261015-WA0000.jpg",
+    "academy": "/website/images/first_frame.jpg",
     "technologies": "/website/images/Techno.png",
     "innovation_lab": "/website/images/Innovation.png",
     "startups": "/website/images/Strtups.png",
@@ -14,13 +17,87 @@
     "about": "/website/images/About.png",
     "blog": "/website/images/River%20City%20at%20Blue%20Hour.png"
   },
-  "ring_colors": {
-    "home": ["#A65A3A", "#68705A", "#8C684B", "#8F4A2D", "#2563EB"],
-    "academy": ["#A65A3A", "#0D9488", "#4F46E5", "#8F4A2D", "#059669", "#D97706"]
+  "combos": {
+    "home_hero": {
+      "color1": "#0F2D55",
+      "color2": "#2563EB",
+      "angle": "135deg"
+    },
+    "academy": {
+      "color1": "#0A192F",
+      "color2": "#1D4ED8",
+      "angle": "135deg"
+    },
+    "technologies": {
+      "color1": "#022C22",
+      "color2": "#059669",
+      "angle": "135deg"
+    },
+    "innovation_lab": {
+      "color1": "#1E1035",
+      "color2": "#7C3AED",
+      "angle": "135deg"
+    },
+    "startups": {
+      "color1": "#2D0F07",
+      "color2": "#EA580C",
+      "angle": "135deg"
+    },
+    "for_business": {
+      "color1": "#0F1D4A",
+      "color2": "#2563EB",
+      "angle": "135deg"
+    },
+    "for_institutions": {
+      "color1": "#064E3B",
+      "color2": "#0D9488",
+      "angle": "135deg"
+    },
+    "events": {
+      "color1": "#312E81",
+      "color2": "#6366F1",
+      "angle": "135deg"
+    },
+    "success_stories": {
+      "color1": "#581C87",
+      "color2": "#BE185D",
+      "angle": "135deg"
+    },
+    "about": {
+      "color1": "#0A192F",
+      "color2": "#1D4ED8",
+      "angle": "135deg"
+    },
+    "blog": {
+      "color1": "#1E293B",
+      "color2": "#0F172A",
+      "angle": "135deg"
+    }
   },
   "text_colors": {
     "heading": "#FFFFFF",
     "subheading": "#F8CB58",
     "body": "#FAF7F2"
+  },
+  "text_content": {
+    "hero_title": "A stronger Odisha<br><em>through AI.</em>",
+    "hero_tagline": "OD AI HUB \u2022 EMPOWERING TALENT & INNOVATION"
+  },
+  "ring_colors": {
+    "home": [
+      "#A65A3A",
+      "#68705A",
+      "#8C684B",
+      "#8F4A2D",
+      "#2563EB"
+    ],
+    "academy": [
+      "#A65A3A",
+      "#0D9488",
+      "#4F46E5",
+      "#8F4A2D",
+      "#059669",
+      "#D97706"
+    ]
   }
 }

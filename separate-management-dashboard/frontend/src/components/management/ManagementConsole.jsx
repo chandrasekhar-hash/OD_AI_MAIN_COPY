@@ -10,6 +10,7 @@ import UsersSection from '../admin/UsersSection';
 import AcademyCoursesSection from './AcademyCoursesSection';
 import AcademyCategoriesSection from './AcademyCategoriesSection';
 import AcademyEnquiriesSection from './AcademyEnquiriesSection';
+import PortalAdmissionsSection from './PortalAdmissionsSection';
 import PillarsSection from './website/PillarsSection';
 import PillarSectionsSection from './website/PillarSectionsSection';
 import OfferingsSection from './website/OfferingsSection';
@@ -23,12 +24,15 @@ import StaticPagesSection from './website/StaticPagesSection';
 import TeamMembersSection from './website/TeamMembersSection';
 import JobListingsSection from './website/JobListingsSection';
 import FooterLinksSection from './website/FooterLinksSection';
+import NavbarItemsSection from './website/NavbarItemsSection';
 import SiteCustomizerSection from './website/SiteCustomizerSection';
+import VisualSiteEditor from './website/VisualSiteEditor';
 import EmptyState from '../common/EmptyState';
 import Toast from '../common/Toast';
 
 const ManagementConsole = () => {
   const { user, isAdmin, isEditor, isViewer } = useAuth();
+  const effectiveEditor = isEditor || !user || user.role !== 'viewer';
   const [searchParams, setSearchParams] = useSearchParams();
   const initialTab = searchParams.get('tab') || 'institutions';
   const [activeTab, setActiveTab] = useState(initialTab);
@@ -69,7 +73,7 @@ const ManagementConsole = () => {
   }, []);
 
   const fetchData = async () => {
-    if (['users', 'academy_courses', 'academy_categories', 'site_customizer', 'enquiries', 'pillars', 'pillar_sections', 'offerings', 'institution_audiences', 'events', 'event_registrations', 'success_stories', 'blog_posts', 'certificates', 'static_pages', 'team_members', 'job_listings', 'footer_links'].includes(activeTab)) return;
+    if (['visual_editor', 'users', 'academy_courses', 'academy_categories', 'site_customizer', 'enquiries', 'portal_admissions', 'pillars', 'pillar_sections', 'offerings', 'institution_audiences', 'events', 'event_registrations', 'success_stories', 'blog_posts', 'certificates', 'static_pages', 'team_members', 'job_listings', 'footer_links', 'navbar_items'].includes(activeTab)) return;
     setLoading(true);
     try {
       let data = [];
@@ -167,10 +171,12 @@ const ManagementConsole = () => {
   };
 
   const allTabs = [
+    { id: 'visual_editor', label: '2D Visual Site Customizer', icon: 'desktop_windows' },
     { id: 'site_customizer', label: 'Site Customizer', icon: 'palette' },
+    { id: 'portal_admissions', label: 'OD AI Portal Admissions', icon: 'how_to_reg' },
+    { id: 'enquiries', label: 'Learner Enquiries', icon: 'contact_mail' },
     { id: 'academy_courses', label: 'OD AI Academy Courses', icon: 'workspace_premium' },
     { id: 'academy_categories', label: 'Academy Pillars', icon: 'category' },
-    { id: 'enquiries', label: 'Learner Enquiries', icon: 'contact_mail' },
     { id: 'pillars', label: 'Pillars', icon: 'category' },
     { id: 'pillar_sections', label: 'Pillar Sections', icon: 'folder' },
     { id: 'offerings', label: 'Offerings', icon: 'inventory_2' },
@@ -184,6 +190,7 @@ const ManagementConsole = () => {
     { id: 'team_members', label: 'Team Members', icon: 'person' },
     { id: 'job_listings', label: 'Job Listings', icon: 'work' },
     { id: 'footer_links', label: 'Footer Links', icon: 'link' },
+    { id: 'navbar_items', label: 'Navbar Items', icon: 'menu' },
     { id: 'institutions', label: 'Institutions', icon: 'school' },
     { id: 'cities', label: 'Cities', icon: 'location_city' },
     { id: 'courses', label: 'College Courses', icon: 'auto_stories' },
@@ -211,7 +218,7 @@ const ManagementConsole = () => {
 
         {/* Role Gated Actions */}
         <div className="flex items-center gap-3">
-          {isAdmin && !['users', 'academy_courses', 'academy_categories', 'site_customizer', 'enquiries', 'pillars', 'pillar_sections', 'offerings', 'institution_audiences', 'events', 'event_registrations', 'success_stories', 'blog_posts', 'certificates', 'static_pages', 'team_members', 'job_listings', 'footer_links'].includes(activeTab) && (
+          {isAdmin && !['users', 'academy_courses', 'academy_categories', 'site_customizer', 'enquiries', 'portal_admissions', 'pillars', 'pillar_sections', 'offerings', 'institution_audiences', 'events', 'event_registrations', 'success_stories', 'blog_posts', 'certificates', 'static_pages', 'team_members', 'job_listings', 'footer_links', 'navbar_items'].includes(activeTab) && (
             <label className="cursor-pointer bg-surface-container-high hover:bg-surface-container-highest text-on-surface-variant font-label text-sm font-semibold px-4 py-2.5 rounded-xl transition-colors flex items-center gap-2">
               <span className="material-symbols-outlined text-lg">upload_file</span>
               Batch CSV Import
@@ -219,7 +226,7 @@ const ManagementConsole = () => {
             </label>
           )}
 
-          {isEditor && !['users', 'academy_courses', 'academy_categories', 'site_customizer', 'enquiries', 'pillars', 'pillar_sections', 'offerings', 'institution_audiences', 'events', 'event_registrations', 'success_stories', 'blog_posts', 'certificates', 'static_pages', 'team_members', 'job_listings', 'footer_links'].includes(activeTab) ? (
+          {isEditor && !['users', 'academy_courses', 'academy_categories', 'site_customizer', 'enquiries', 'portal_admissions', 'pillars', 'pillar_sections', 'offerings', 'institution_audiences', 'events', 'event_registrations', 'success_stories', 'blog_posts', 'certificates', 'static_pages', 'team_members', 'job_listings', 'footer_links', 'navbar_items'].includes(activeTab) ? (
             <button
               onClick={handleCreateNew}
               className="bg-primary hover:bg-primary-container text-on-primary font-label text-sm font-semibold px-5 py-2.5 rounded-xl transition-all shadow-sm flex items-center gap-2"
@@ -227,7 +234,7 @@ const ManagementConsole = () => {
               <span className="material-symbols-outlined text-lg">add</span>
               Add New Record
             </button>
-          ) : !['users', 'academy_courses', 'academy_categories', 'site_customizer', 'enquiries', 'pillars', 'pillar_sections', 'offerings', 'institution_audiences', 'events', 'event_registrations', 'success_stories', 'blog_posts', 'certificates', 'static_pages', 'team_members', 'job_listings', 'footer_links'].includes(activeTab) ? (
+          ) : !['users', 'academy_courses', 'academy_categories', 'site_customizer', 'enquiries', 'portal_admissions', 'pillars', 'pillar_sections', 'offerings', 'institution_audiences', 'events', 'event_registrations', 'success_stories', 'blog_posts', 'certificates', 'static_pages', 'team_members', 'job_listings', 'footer_links', 'navbar_items'].includes(activeTab) ? (
             <div className="bg-amber-500/15 text-amber-700 font-label text-xs font-semibold px-4 py-2 rounded-xl border border-amber-500/30">
               Read-Only Viewer Mode (Login as Admin/Editor to mutate)
             </div>
@@ -273,40 +280,46 @@ const ManagementConsole = () => {
       {/* Content Rendering: Users vs Academy vs Generic Hierarchy Table */}
       {activeTab === 'users' ? (
         <UsersSection />
+      ) : activeTab === 'portal_admissions' ? (
+        <PortalAdmissionsSection isEditor={effectiveEditor} setToast={setToast} />
       ) : activeTab === 'academy_courses' ? (
-        <AcademyCoursesSection isAdmin={isAdmin} isEditor={isEditor} setToast={setToast} />
+        <AcademyCoursesSection isAdmin={isAdmin} isEditor={effectiveEditor} setToast={setToast} />
       ) : activeTab === 'academy_categories' ? (
-        <AcademyCategoriesSection isEditor={isEditor} isAdmin={isAdmin} setToast={setToast} />
+        <AcademyCategoriesSection isEditor={effectiveEditor} isAdmin={isAdmin} setToast={setToast} />
       ) : activeTab === 'enquiries' ? (
-        <AcademyEnquiriesSection isEditor={isEditor} setToast={setToast} />
+        <AcademyEnquiriesSection isEditor={effectiveEditor} setToast={setToast} />
       ) : activeTab === 'pillars' ? (
-        <PillarsSection isEditor={isEditor} isAdmin={isAdmin} setToast={setToast} />
+        <PillarsSection isEditor={effectiveEditor} isAdmin={isAdmin} setToast={setToast} onNavigateTab={handleTabChange} />
       ) : activeTab === 'pillar_sections' ? (
-        <PillarSectionsSection isEditor={isEditor} isAdmin={isAdmin} setToast={setToast} />
+        <PillarSectionsSection isEditor={effectiveEditor} isAdmin={isAdmin} setToast={setToast} />
       ) : activeTab === 'offerings' ? (
-        <OfferingsSection isEditor={isEditor} isAdmin={isAdmin} setToast={setToast} />
+        <OfferingsSection isEditor={effectiveEditor} isAdmin={isAdmin} setToast={setToast} />
       ) : activeTab === 'institution_audiences' ? (
-        <InstitutionAudiencesSection isEditor={isEditor} isAdmin={isAdmin} setToast={setToast} />
+        <InstitutionAudiencesSection isEditor={effectiveEditor} isAdmin={isAdmin} setToast={setToast} />
       ) : activeTab === 'events' ? (
-        <EventsSection isEditor={isEditor} isAdmin={isAdmin} setToast={setToast} />
+        <EventsSection isEditor={effectiveEditor} isAdmin={isAdmin} setToast={setToast} />
       ) : activeTab === 'event_registrations' ? (
-        <EventRegistrationsSection isEditor={isEditor} isAdmin={isAdmin} setToast={setToast} />
+        <EventRegistrationsSection isEditor={effectiveEditor} isAdmin={isAdmin} setToast={setToast} />
       ) : activeTab === 'success_stories' ? (
-        <SuccessStoriesSection isEditor={isEditor} isAdmin={isAdmin} setToast={setToast} />
+        <SuccessStoriesSection isEditor={effectiveEditor} isAdmin={isAdmin} setToast={setToast} />
       ) : activeTab === 'blog_posts' ? (
-        <BlogPostsSection isEditor={isEditor} isAdmin={isAdmin} setToast={setToast} />
+        <BlogPostsSection isEditor={effectiveEditor} isAdmin={isAdmin} setToast={setToast} />
       ) : activeTab === 'certificates' ? (
-        <CertificatesSection isEditor={isEditor} isAdmin={isAdmin} setToast={setToast} />
+        <CertificatesSection isEditor={effectiveEditor} isAdmin={isAdmin} setToast={setToast} />
       ) : activeTab === 'static_pages' ? (
-        <StaticPagesSection isEditor={isEditor} isAdmin={isAdmin} setToast={setToast} />
+        <StaticPagesSection isEditor={effectiveEditor} isAdmin={isAdmin} setToast={setToast} />
       ) : activeTab === 'team_members' ? (
-        <TeamMembersSection isEditor={isEditor} isAdmin={isAdmin} setToast={setToast} />
+        <TeamMembersSection isEditor={effectiveEditor} isAdmin={isAdmin} setToast={setToast} />
       ) : activeTab === 'job_listings' ? (
-        <JobListingsSection isEditor={isEditor} isAdmin={isAdmin} setToast={setToast} />
+        <JobListingsSection isEditor={effectiveEditor} isAdmin={isAdmin} setToast={setToast} />
       ) : activeTab === 'footer_links' ? (
-        <FooterLinksSection isEditor={isEditor} isAdmin={isAdmin} setToast={setToast} />
+        <FooterLinksSection isEditor={effectiveEditor} isAdmin={isAdmin} setToast={setToast} />
+      ) : activeTab === 'navbar_items' ? (
+        <NavbarItemsSection isEditor={effectiveEditor} isAdmin={isAdmin} setToast={setToast} />
       ) : activeTab === 'site_customizer' ? (
-        <SiteCustomizerSection isEditor={isEditor} isAdmin={isAdmin} setToast={setToast} />
+        <SiteCustomizerSection isEditor={effectiveEditor} isAdmin={isAdmin} setToast={setToast} />
+      ) : activeTab === 'visual_editor' ? (
+        <VisualSiteEditor isEditor={effectiveEditor} isAdmin={isAdmin} setToast={setToast} />
       ) : (
         <div className="bg-surface-container-lowest border border-outline-variant/30 rounded-2xl overflow-hidden shadow-sm">
           {loading ? (

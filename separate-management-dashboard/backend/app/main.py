@@ -175,6 +175,7 @@ app.include_router(public_academy.router, prefix="/api")
 app.include_router(public_website.router, prefix="/api")
 
 @app.get("/health", tags=["Health & Keepalive"])
+@app.get(f"{settings.API_V1_STR}/health", tags=["Health & Keepalive"])
 @app.get(f"{settings.API_V1_STR}/ping", tags=["Health & Keepalive"])
 def health_check():
     return {

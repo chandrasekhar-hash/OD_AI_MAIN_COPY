@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { websiteAdminApi } from '../../../api/websiteAdminApi';
 
-const PillarsSection = ({ isEditor, isAdmin, setToast }) => {
+const PillarsSection = ({ isEditor, isAdmin, setToast, onNavigateTab }) => {
   const [pillars, setPillars] = useState([]);
   const [loading, setLoading] = useState(true);
   const [editingPillar, setEditingPillar] = useState(null);
   const [saving, setSaving] = useState(false);
+  const [uploadingImage, setUploadingImage] = useState(false);
 
   const fetchPillars = async () => {
     setLoading(true);
@@ -85,6 +86,26 @@ const PillarsSection = ({ isEditor, isAdmin, setToast }) => {
     });
   };
 
+  const handleImageUpload = async (e) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    setUploadingImage(true);
+    try {
+      const formData = new FormData();
+      formData.append('file', file);
+      const res = await websiteAdminApi.uploadCustomizationAsset(formData);
+      if (res?.url) {
+        setEditingPillar((prev) => ({ ...prev, hero_image_url: res.url }));
+        setToast({ message: 'Image uploaded successfully!', type: 'success' });
+      }
+    } catch (err) {
+      console.error(err);
+      setToast({ message: 'Image upload failed. Please try again.', type: 'error' });
+    } finally {
+      setUploadingImage(false);
+    }
+  };
+
   const getStatusBadge = (status) => {
     switch (status) {
       case 'published':
@@ -139,9 +160,19 @@ const PillarsSection = ({ isEditor, isAdmin, setToast }) => {
               />
 
               <div>
+                {pillar.hero_image_url && (
+                  <div className="mb-3 h-28 w-full rounded-xl overflow-hidden bg-surface-container relative border border-outline-variant/20">
+                    <img
+                      src={pillar.hero_image_url}
+                      alt={pillar.name}
+                      className="w-full h-full object-cover"
+                      onError={(e) => { e.currentTarget.style.display = 'none'; }}
+                    />
+                  </div>
+                )}
                 <div className="flex items-center gap-3 mb-3 pt-2">
                   <div
-                    className="w-10 h-10 rounded-full flex items-center justify-center font-headline font-extrabold text-white text-base shadow-xs"
+                    className="w-10 h-10 rounded-full flex items-center justify-center font-headline font-extrabold text-white text-base shadow-xs flex-shrink-0"
                     style={{ backgroundColor: pillar.accent_color }}
                   >
                     {pillar.icon || pillar.name?.charAt(0) || '?'}
@@ -154,39 +185,74 @@ const PillarsSection = ({ isEditor, isAdmin, setToast }) => {
                   </div>
                 </div>
 
-                <p className="text-xs text-on-surface-variant mb-4 leading-relaxed">
+                <p className="text-xs text-on-surface-variant mb-4 leading-relaxed line-clamp-2">
                   {pillar.description}
                 </p>
 
-                <div className="flex items-center gap-2 text-xs font-medium text-on-surface-variant mb-2">
+                <div className="flex flex-wrap items-center gap-2 text-xs font-medium text-on-surface-variant mb-2">
                   <span className="bg-surface-container px-2 py-1 rounded-md">
                     Order: {pillar.display_order}
                   </span>
-                  <span className="bg-surface-container px-2 py-1 rounded-md">
-                    Slug: {pillar.slug}
+                  <span className="bg-surface-container px-2 py-1 rounded-md font-mono text-[11px]">
+                    /{pillar.slug}
                   </span>
                   {getStatusBadge(pillar.status)}
                 </div>
               </div>
 
-              {isEditor && (
-                <div className="pt-3 border-t border-outline-variant/20 flex justify-end gap-2">
-                  <button
-                    onClick={() => handleEditClick(pillar)}
-                    className="px-4 py-1.5 rounded-lg bg-primary hover:bg-primary-container text-on-primary text-xs font-semibold transition-colors"
-                  >
-                    Edit
-                  </button>
+              <div className="pt-3 border-t border-outline-variant/20 flex flex-wrap items-center justify-between gap-2 mt-2">
+                <div className="flex items-center gap-1.5">
+                  {onNavigateTab && (
+                    <>
+                      <button
+                        type="button"
+                        onClick={() => onNavigateTab('pillar_sections')}
+                        className="px-2.5 py-1 rounded-lg bg-surface-container text-on-surface-variant hover:text-primary text-[11px] font-semibold transition-colors flex items-center gap-1"
+                        title="Manage sections for this pillar"
+                      >
+                        <span className="material-symbols-outlined text-sm">view_list</span>
+                        Sections
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => onNavigateTab('offerings')}
+                        className="px-2.5 py-1 rounded-lg bg-surface-container text-on-surface-variant hover:text-primary text-[11px] font-semibold transition-colors flex items-center gap-1"
+                        title="Manage offerings for this pillar"
+                      >
+                        <span className="material-symbols-outlined text-sm">inventory_2</span>
+                        Offerings
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => onNavigateTab('visual_editor')}
+                        className="px-2.5 py-1 rounded-lg bg-surface-container text-on-surface-variant hover:text-primary text-[11px] font-semibold transition-colors flex items-center gap-1"
+                        title="Customize live appearance in visual editor"
+                      >
+                        <span className="material-symbols-outlined text-sm">palette</span>
+                        Customize
+                      </button>
+                    </>
+                  )}
+                </div>
+                <div className="flex items-center gap-1.5 ml-auto">
+                  {isEditor && (
+                    <button
+                      onClick={() => handleEditClick(pillar)}
+                      className="px-3.5 py-1.5 rounded-lg bg-primary hover:bg-primary-container text-on-primary text-xs font-semibold transition-colors"
+                    >
+                      Edit
+                    </button>
+                  )}
                   {isAdmin && (
                     <button
                       onClick={() => handleDelete(pillar.id, pillar.name)}
-                      className="px-4 py-1.5 rounded-lg bg-error/15 text-error hover:bg-error/25 text-xs font-semibold transition-colors"
+                      className="px-3 py-1.5 rounded-lg bg-error/15 text-error hover:bg-error/25 text-xs font-semibold transition-colors"
                     >
                       Delete
                     </button>
                   )}
                 </div>
-              )}
+              </div>
             </div>
           ))}
         </div>
@@ -278,14 +344,47 @@ const PillarsSection = ({ isEditor, isAdmin, setToast }) => {
               </div>
 
               <div>
-                <label className="block font-semibold mb-1">Hero Image URL</label>
-                <input
-                  type="url"
-                  value={editingPillar.hero_image_url || ''}
-                  onChange={(e) => setEditingPillar({ ...editingPillar, hero_image_url: e.target.value })}
-                  className="w-full px-3 py-2 rounded-xl border border-outline-variant bg-surface outline-none"
-                  placeholder="https://example.com/hero.jpg"
-                />
+                <label className="block font-semibold mb-1">Hero Image</label>
+                <div className="flex flex-col sm:flex-row gap-2 items-start sm:items-center mb-2">
+                  <input
+                    type="text"
+                    value={editingPillar.hero_image_url || ''}
+                    onChange={(e) => setEditingPillar({ ...editingPillar, hero_image_url: e.target.value })}
+                    className="flex-1 px-3 py-2 rounded-xl border border-outline-variant bg-surface outline-none w-full"
+                    placeholder="https://example.com/hero.jpg or /website/images/hero.jpg"
+                  />
+                  <label className="cursor-pointer px-3.5 py-2 rounded-xl bg-surface-container hover:bg-surface-container-high border border-outline-variant/60 text-on-surface font-semibold text-xs flex items-center gap-1.5 whitespace-nowrap transition-colors">
+                    <span className="material-symbols-outlined text-base">
+                      {uploadingImage ? 'progress_activity' : 'upload_file'}
+                    </span>
+                    <span>{uploadingImage ? 'Uploading...' : 'Upload File'}</span>
+                    <input
+                      type="file"
+                      accept="image/*"
+                      onChange={handleImageUpload}
+                      disabled={uploadingImage}
+                      className="hidden"
+                    />
+                  </label>
+                </div>
+                {editingPillar.hero_image_url && (
+                  <div className="mt-2 relative h-32 w-full rounded-xl overflow-hidden border border-outline-variant/40 bg-surface-container">
+                    <img
+                      src={editingPillar.hero_image_url}
+                      alt="Hero Preview"
+                      className="w-full h-full object-cover"
+                      onError={(e) => { e.currentTarget.style.display = 'none'; }}
+                    />
+                    <button
+                      type="button"
+                      onClick={() => setEditingPillar({ ...editingPillar, hero_image_url: '' })}
+                      className="absolute top-2 right-2 p-1 rounded-lg bg-black/60 text-white hover:bg-red-600 transition-colors text-xs"
+                      title="Remove image"
+                    >
+                      <span className="material-symbols-outlined text-sm">close</span>
+                    </button>
+                  </div>
+                )}
               </div>
 
               <div className="grid grid-cols-2 gap-3 items-center">
